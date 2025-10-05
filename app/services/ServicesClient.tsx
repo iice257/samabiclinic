@@ -82,7 +82,7 @@ export default function ServicesClient() {
               return (
                 <div
                   key={service.title}
-                  className="group bg-card rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all duration-500 hover:-translate-y-1"
+                  className="group bg-card rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all  hover:-translate-y-1"
                   style={{
                     animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
                   }}

@@ -35,7 +35,7 @@ export default function TreatmentsClientPage() {
                   animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
                 }}
               >
-                <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-500 hover:-translate-y-2">
+                <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all  hover:-translate-y-2">
                   <div className="relative h-64 overflow-hidden">
                     <Image
                       src={treatment.image || "/placeholder.svg"}

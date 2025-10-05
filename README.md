@@ -1,30 +1,170 @@
-# Functional medicine website
+## 🩺 Samabi Functional Medicine Clinic Website
 
-*Automatically synced with your [v0.app](https://v0.app) deployments*
+A modern, professional, and accessible React-based website for **Samabi Functional Medicine Clinic**, a health practice in Port Harcourt, Nigeria, specializing in:
 
-[![Deployed on Vercel](https://img.shields.io/badge/Deployed%20on-Vercel-black?style=for-the-badge&logo=vercel)](https://vercel.com/iice257s-projects/v0-functional-medicine-website)
-[![Built with v0](https://img.shields.io/badge/Built%20with-v0.app-black?style=for-the-badge)](https://v0.app/chat/projects/DL09weU8wCN)
+- **Mental Health**
+- **Addiction & Recovery**
+- **Functional / Nutritional Medicine**
 
-## Overview
+The site balances **medical credibility** with **warm accessibility**, ensuring patients trust the clinic while feeling welcomed and supported.
 
-This repository will stay in sync with your deployed chats on [v0.app](https://v0.app).
-Any changes you make to your deployed app will be automatically pushed to this repository from [v0.app](https://v0.app).
+## ✨ Features
 
-## Deployment
+- 📱 **Responsive Design** — mobile-first, optimized for all devices  
+- 🎨 **Modern UI** — clean typography, calming colors (White, Ash, Teal/Blue accent)  
+- 🔎 **SEO-Optimized** — structured metadata, JSON-LD schema, and local service keywords  
+- 🗂️ **Reusable Components** — modular React + Tailwind CSS components  
+- 📚 **Resources & Blog** — CMS-driven content for patient education and SEO growth  
+- 📝 **Booking & Contact Form** — secure, accessible form with **consent checkbox** for PHI  
+- 🌐 **Accessibility (a11y)** — WCAG-compliant colors, ARIA labels, and keyboard support  
+- ⚡ **Performance-First** — lazy-loaded images, responsive `srcset`, WebP support  
 
-Your project is live at:
+---
 
-**[https://vercel.com/iice257s-projects/v0-functional-medicine-website](https://vercel.com/iice257s-projects/v0-functional-medicine-website)**
+## 🛠️ Tech Stack
 
-## Build your app
+- **Frontend:** React (with Next.js), Tailwind CSS  
+- **Components:** Modular, prop-driven React components  
+- **Forms:** Booking form with client-side validation & secure backend endpoint  
+- **SEO:** Next SEO / React Helmet + JSON-LD schema  
+- **CMS:** Sanity or Strapi (for blog/resources)  
+- **Deployment:** Vercel 
+- **Other Backend:**Express for custom booking + patient data handling  
 
-Continue building your app on:
+---
 
-**[https://v0.app/chat/projects/DL09weU8wCN](https://v0.app/chat/projects/DL09weU8wCN)**
+## 📁 Project Structure
 
-## How It Works
+File Directory Tree
 
-1. Create and modify your project using [v0.app](https://v0.app)
-2. Deploy your chats from the v0 interface
-3. Changes are automatically pushed to this repository
-4. Vercel deploys the latest version from this repository
+src/
+ ├── components/
+ │    └── ui/
+ │         ├── Button.tsx
+ │         ├── NavbarLink.tsx
+ │         ├── ServiceCard.tsx
+ │         ├── FeatureCard.tsx
+ │         └── SectionHeading.tsx
+ │
+ ├── sections/
+ │    ├── HeroSection.tsx
+ │    ├── ApproachSection.tsx
+ │    ├── WhyChooseUsSection.tsx
+ │    ├── TestimonialsSection.tsx     // placeholder
+ │    ├── ContactSection.tsx          // placeholder
+ │    └── FooterSection.tsx           // placeholder
+ │
+ └── pages/
+      └── Home.tsx
+
+
+
+## 🎨 Design System
+
+* **Colors:**
+
+  * White `#FFFFFF`
+  * Ash `#B0B0B0` (neutral grays)
+  * Teal `#0EA5A4` (accent CTA)
+  * Optional: Soft Blue `#4FC3F7`
+
+* **Fonts:** `Inter, system-ui, sans-serif`
+
+* **Components:** Buttons, cards, grids, and forms are reusable with consistent spacing & typography.
+
+---
+
+## 🔎 SEO & Metadata
+
+* **Meta description:**
+
+  > SAMABI Functional Medicine Clinic in Port Harcourt offers holistic care in psychiatry, psychotherapy, nutritional psychiatry, and addiction recovery.
+
+* **Keywords:**
+  `mental health clinic port harcourt`, `psychiatrist port harcourt`, `addiction recovery nigeria`, `functional medicine nigeria`
+
+* **Structured Data (JSON-LD):** `MedicalClinic` schema with address, phone, services.
+
+---
+
+## 🛡️ Privacy & Security
+
+* Booking form requires **explicit patient consent** before submission.
+* Only **minimal PHI** is collected (name, contact, service, preferred time).
+* All traffic served over **HTTPS**.
+* Backend (if enabled) uses **input validation** and **encrypted storage**.
+* Emergency crisis line displayed clearly (non-form).
+
+---
+
+## 🌐 Deployment
+
+Recommended: **Vercel** (for Next.js) or **Netlify**.
+Both support serverless functions for booking form handling.
+
+Steps:
+
+```bash
+# Vercel
+vercel
+
+# Netlify
+netlify deploy
+```
+
+---
+
+## 🧑‍💻 Contribution Guidelines
+
+1. **Branching:**
+
+   * `main` → production-ready
+   * `dev` → active development
+
+2. **Commit convention:**
+
+   * `feat:` new features
+   * `fix:` bug fixes
+   * `docs:` documentation changes
+
+3. **Code style:**
+
+   * ESLint + Prettier enforced
+   * Use semantic HTML + accessible components
+
+4. **Testing:**
+
+   * Manual accessibility checks with Lighthouse & axe
+   * Responsive testing (mobile-first)
+
+---
+
+## 📌 Roadmap
+
+* ✅ Homepage (Hero, Services, About preview, Testimonials)
+* ✅ Booking Form with consent
+* ⬜ About page (Founder bio, mission, values)
+* ⬜ Services (detailed service pages)
+* ⬜ Resources / Blog (CMS integration)
+* ⬜ SEO + Analytics setup
+* ⬜ Patient Portal (future phase)
+
+---
+
+## 📞 Contact
+
+**Samabi Functional Medicine Clinic**
+📍 Rumuosi, Port Harcourt, Nigeria
+📧 [contact@samabi-clinic.com](mailto:contact@samabi-clinic.com)
+📞 +234-XXX-XXX-XXXX
+
+---
+
+© 2025 Samabi Functional Medicine Clinic. All rights reserved.
+
+```
+
+---
+
+Would you like me to **add real badge-style sections** (build status, license, framework, etc.) at the top of the README to make it more “open-source polished”? Or should I keep it **client-facing clean** for the clinic team?
+```

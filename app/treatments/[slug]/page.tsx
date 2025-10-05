@@ -17,16 +17,21 @@ export async function generateMetadata({
 
   if (!treatment) {
     return {
-      title: "Treatment Not Found | Samabi Functional Medicine",
+      title: "Treatment Not Found | Samabi Functional Medicine Clinic",
+      description: "The requested treatment could not be found.",
+      openGraph: {
+        title: "Treatment Not Found | Samabi Functional Medicine Clinic",
+        description: "The requested treatment could not be found.",
+      },
     }
   }
 
   return {
-    title: `${treatment.title} | Samabi Functional Medicine`,
-    description: treatment.summary,
+    title: `${treatment.title} | Samabi Functional Medicine Clinic`,
+    description: treatment.description,
     openGraph: {
-      title: `${treatment.title} | Samabi Functional Medicine`,
-      description: treatment.summary,
+      title: `${treatment.title} | Samabi Functional Medicine Clinic`,
+      description: treatment.description,
     },
   }
 }

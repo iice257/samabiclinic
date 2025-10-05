@@ -2,11 +2,11 @@ import type { Metadata } from "next"
 import ServicesClient from "./ServicesClient"
 
 export const metadata: Metadata = {
-  title: "Our Services | Samabi Functional Medicine",
+  title: "Our Services | Samabi Functional Medicine Clinic",
   description:
     "Comprehensive functional medicine services including diagnostics, integrative treatments, nutritional therapy, and lifestyle optimization.",
   openGraph: {
-    title: "Our Services | Samabi Functional Medicine",
+    title: "Our Services | Samabi Functional Medicine Clinic",
     description:
       "Comprehensive functional medicine services including diagnostics, integrative treatments, nutritional therapy, and lifestyle optimization.",
   },

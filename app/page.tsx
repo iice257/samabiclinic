@@ -73,7 +73,7 @@ export default function HomePage() {
                 Healthcare That Sees the Whole You
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                At Samabi, we believe your body is an interconnected system. We don't just treat symptoms—we investigate
+                At Samabi Functional Medicine Clinic, we believe your body is an interconnected system. We don't just treat symptoms,we investigate
                 the root causes of your health challenges.
               </p>
               <ul className="space-y-4">
@@ -191,7 +191,7 @@ export default function HomePage() {
               },
               {
                 quote:
-                  "Samabi doesn't just treat symptoms—they helped me understand my body and take control of my health.",
+                  "Samabi doesn't just treat symptoms,they helped me understand my body and take control of my health.",
                 author: "Amara N.",
                 role: "Port Harcourt",
               },
