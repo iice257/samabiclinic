@@ -73,14 +73,13 @@ export default function AboutPage() {
       <section className="bg-muted/30 px-4 py-16 md:py-24">
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <h2 className="mb-4 font-bold text-3xl text-foreground md:text-4xl">Meet Our Team</h2>
+            <h2 className="mb-4 font-bold text-3xl text-foreground md:text-4xl">Meet Our Founder</h2>
             <p className="mx-auto max-w-2xl text-balance text-muted-foreground text-lg">
-              Expert clinicians dedicated to your health and wellbeing
+              Expert clinician dedicated to your health and wellbeing
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2">
-            {/* Dr. Vincent Nallatamby */}
+          <div className="mx-auto max-w-2xl">
             <Card className="group overflow-hidden border-border/50 bg-card transition-all duration-500 hover:shadow-xl hover:-translate-y-1 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
               <div className="relative aspect-[3/4] overflow-hidden">
                 <Image
@@ -90,34 +89,17 @@ export default function AboutPage() {
                   className="object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
-              <div className="p-6">
-                <h3 className="mb-2 font-semibold text-foreground text-xl">Dr. Vincent Nallatamby</h3>
-                <p className="mb-4 font-medium text-primary text-sm">Lead Clinician, Functional Medicine Specialist</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  With over 15 years of experience in integrative medicine, Dr. Nallatamby specializes in complex
-                  chronic conditions, hormonal imbalances, and metabolic health. His approach combines advanced
-                  diagnostics with personalized treatment protocols.
+              <div className="p-8">
+                <h3 className="mb-2 font-semibold text-foreground text-2xl">Dr. Vincent Nallatamby</h3>
+                <p className="mb-4 font-medium text-primary">
+                  Founder & Lead Clinician, Functional Medicine Specialist
                 </p>
-              </div>
-            </Card>
-
-            {/* Dr. Ifeoma Chike */}
-            <Card className="group overflow-hidden border-border/50 bg-card transition-all duration-500 hover:shadow-xl hover:-translate-y-1 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
-              <div className="relative aspect-[3/4] overflow-hidden">
-                <Image
-                  src="/professional-female-doctor-portrait-nutrition-medi.jpg"
-                  alt="Dr. Ifeoma Chike"
-                  fill
-                  className="object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-              </div>
-              <div className="p-6">
-                <h3 className="mb-2 font-semibold text-foreground text-xl">Dr. Ifeoma Chike</h3>
-                <p className="mb-4 font-medium text-primary text-sm">Nutrition and Lifestyle Medicine Expert</p>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  Dr. Chike brings a holistic perspective to patient care, focusing on nutritional therapy, gut health,
-                  and lifestyle optimization. She empowers patients to make sustainable changes that support long-term
-                  wellness and vitality.
+                <p className="text-muted-foreground leading-relaxed">
+                  With over 15 years of experience in integrative medicine, Dr. Nallatamby founded Samabi to provide
+                  personalized, root-cause healthcare. He specializes in complex chronic conditions, hormonal
+                  imbalances, metabolic health, and nutritional therapy. His approach combines advanced diagnostics with
+                  evidence-based holistic treatment protocols, empowering patients to achieve lasting wellness and
+                  vitality.
                 </p>
               </div>
             </Card>
