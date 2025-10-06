@@ -9,11 +9,10 @@ export default function NotFound() {
         <div className="mb-8">
           <h1 className="mb-4 font-bold text-8xl text-primary md:text-9xl">404</h1>
           <h2 className="mb-4 text-balance font-bold text-2xl text-foreground md:text-3xl">
-            This Page Isn't Ready Yet — Or It Might Not Exist
+            This Page Is Not Available
           </h2>
           <p className="mx-auto max-w-md text-balance text-muted-foreground leading-relaxed">
-            We're constantly improving the Samabi experience. The page you're looking for may be under development or
-            has been moved.
+            We're constantly improving the Samabi Website experience. The page you're looking for is either under development, or simply doesn't exist.
           </p>
         </div>
 

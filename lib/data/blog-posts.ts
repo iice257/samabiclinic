@@ -90,7 +90,7 @@ If you're experiencing persistent digestive issues or frequent illness, consider
 
 Your gut health is foundational to your overall wellbeing. By supporting your microbiome, you're investing in a stronger immune system and better health for years to come.
     `,
-    author: "Dr. Ifeoma Chike",
+    author: "Dr. Adeola",
     date: "2024-03-15",
     readTime: "6 min read",
     category: "Gut Health",
@@ -230,7 +230,7 @@ The key is consistency with your recovery protocol and patience with the process
 
 If you're struggling with persistent fatigue, don't accept it as your new normal. Comprehensive functional medicine testing can uncover the root causes and guide you toward lasting energy restoration.
     `,
-    author: "Dr. Vincent Nallatamby",
+    author: "Dr. Vincent",
     date: "2024-03-08",
     readTime: "8 min read",
     category: "Energy & Fatigue",
@@ -438,7 +438,7 @@ Hormonal balance is achievable at any age. By supporting your body with proper n
 
 Don't accept hormonal symptoms as an inevitable part of aging. With the right approach, you can feel your best for decades to come.
     `,
-    author: "Dr. Ifeoma Chike",
+    author: "Dr. Folaranmi",
     date: "2024-02-28",
     readTime: "10 min read",
     category: "Hormonal Health",

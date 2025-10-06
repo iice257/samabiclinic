@@ -27,9 +27,10 @@ export function Navbar() {
   }
 
   const navLinks = [
+    { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
-    { href: "/treatments", label: "Treatments and Bookings" },
-    { href: "/insights", label: "Blog " },
+    { href: "/bookings", label: "Treatments and Bookings" },
+    { href: "/blog", label: "Blog " },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ]
@@ -83,7 +84,7 @@ export function Navbar() {
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             <Button asChild className="rounded-full">
-              <Link href="/book">Book Consultation</Link>
+              <Link href="/bookings">Book Consultation</Link>
             </Button>
           </div>
 

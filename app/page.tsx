@@ -179,7 +179,7 @@ export default function HomePage() {
             {[
               {
                 quote:
-                  "After years of digestive issues, Dr. Adeyemi's approach finally gave me answers. I feel like myself again.",
+                  "After years of digestive issues, Dr. Abimbola Kazeem's approach finally gave me answers. I feel like myself again.",
                 author: "Chioma O.",
                 role: "Lagos",
               },

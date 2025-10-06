@@ -83,17 +83,17 @@ export default function AboutPage() {
             <Card className="px-4 group overflow-hidden border-border/50 bg-card transition-all hover:shadow-xl hover:-translate-y-1 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
               <div className="relative aspect-[6/4] overflow-hidden">
                 <Image
-                  src="/Dr. Kazeem Abimbola Uthman.jpeg"
-                  alt="Dr. Kazeem Abimbola Uthman"
+                  src="/Dr. Abimbola Kazeem.jpeg"
+                  alt="Dr. Abimbola Kazeem"
                   fill
                   className="rounded-sm object-cover transition-transform duration-700 group-hover:scale-105"
                 />
               </div>
               <div className="p-6">
-                <h3 className="mb-2 font-semibold text-foreground text-xl">Dr. Kazeem Abimbola Uthman</h3>
+                <h3 className="mb-2 font-semibold text-foreground text-xl">Dr. Abimbola Kazeem</h3>
                 <p className="mb-4 font-medium text-primary text-sm">15+ years in psychiatry and integrative wellness, redefining mental health care in Nigeria.</p>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  With over 15 years of experience in integrative medicine, Dr. Uthman founded Samabi to provide
+                  With over 15 years of experience in integrative medicine, Dr. Kazeem founded Samabi to provide
                   personalized, root-cause healthcare. He specializes in complex chronic conditions, hormonal
                   imbalances, metabolic health, and nutritional therapy. His approach combines advanced diagnostics with
                   evidence-based holistic treatment protocols, empowering patients to achieve lasting wellness and

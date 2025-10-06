@@ -65,25 +65,25 @@ export function Footer() {
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-muted-foreground text-sm">
-                  123 Wellness Avenue, Victoria Island, Lagos, Nigeria
+                  No 5 Isaac Ken Close, off farm Road Rumuosi Portharcourt. The nearest Bus Stop: East West Road by Amaechi School, Rumuosi Portharcourt.
                 </span>
               </li>
               <li className="flex items-center space-x-3">
                 <Phone className="h-5 w-5 text-primary flex-shrink-0" />
                 <a
-                  href="tel:+2341234567890"
+                  href="tel:+2348166423218"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
-                  +234 123 456 7890
+                  +234 816 642 3218
                 </a>
               </li>
               <li className="flex items-center space-x-3">
                 <Mail className="h-5 w-5 text-primary flex-shrink-0" />
                 <a
-                  href="mailto:contact@samabi-clinic.com"
+                  href="mailto:Kazeem.uthman@npmcn.com"
                   className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                 >
-                  contact@samabi-clinic.health
+                  Kazeem.uthman@npmcn.com
                 </a>
               </li>
             </ul>
