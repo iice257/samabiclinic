@@ -4,7 +4,6 @@ import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock } from "lucide-react"
-import { getAllBlogPosts } from "@/lib/data/blog-posts"
 
 export const metadata: Metadata = {
   title: "Health Insights & Articles | Samabi Functional Medicine",
@@ -18,8 +17,39 @@ export const metadata: Metadata = {
   },
 }
 
-export default function InsightsPage() {
-  const posts = getAllBlogPosts()
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string;
+  image?: string;
+  readTime?: string;
+  tags: string[];
+  published: boolean;
+  author: {
+    name: string;
+  };
+  category: {
+    name: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+async function getBlogPosts(): Promise<BlogPost[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/posts`, {
+    cache: 'no-store', // Ensure fresh data on each request
+  });
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data');
+  }
+  return res.json();
+}
+
+export default async function InsightsPage() {
+  const posts = await getBlogPosts();
 
   return (
     <main className="min-h-screen">
@@ -31,7 +61,7 @@ export default function InsightsPage() {
               Insights for a Healthier You
             </h1>
             <p className="mx-auto max-w-2xl text-balance text-muted-foreground text-lg md:text-xl leading-relaxed">
-              Evidence-based articles on functional medicine, nutrition, and holistic wellness from our expert team.
+              Evidence-based articles on functional medicine, gut health, hormones, nutrition, and holistic wellness from our expert team.
             </p>
           </div>
         </div>
@@ -57,7 +87,7 @@ export default function InsightsPage() {
                       className="object-cover transition-transform duration-700 group-hover:scale-110"
                     />
                     <div className="absolute top-4 left-4">
-                      <Badge className="bg-primary/90 backdrop-blur-sm">{post.category}</Badge>
+                      <Badge className="bg-primary/90 backdrop-blur-sm">{post.category.name}</Badge>
                     </div>
                   </div>
                   <div className="p-6">
@@ -65,7 +95,7 @@ export default function InsightsPage() {
                       <div className="flex items-center gap-1">
                         <Calendar className="h-3 w-3" />
                         <span>
-                          {new Date(post.date).toLocaleDateString("en-US", {
+                          {new Date(post.createdAt).toLocaleDateString("en-US", {
                             month: "short",
                             day: "numeric",
                             year: "numeric",
@@ -74,13 +104,13 @@ export default function InsightsPage() {
                       </div>
                       <div className="flex items-center gap-1">
                         <Clock className="h-3 w-3" />
-                        <span>{post.readTime}</span>
+                        <span>{post.readTime || "5 min read"}</span>
                       </div>
                     </div>
                     <h3 className="mb-3 font-semibold text-foreground text-lg leading-tight transition-colors group-hover:text-primary">
                       {post.title}
                     </h3>
-                    <p className="mb-4 text-muted-foreground text-sm leading-relaxed line-clamp-3">{post.excerpt}</p>
+                    <p className="mb-4 text-muted-foreground text-sm leading-relaxed line-clamp-3">{post.excerpt || post.content.substring(0, 150) + '...'}</p>
                     <div className="flex flex-wrap gap-2">
                       {post.tags.slice(0, 3).map((tag) => (
                         <Badge key={tag} variant="outline" className="text-xs">
@@ -89,7 +119,7 @@ export default function InsightsPage() {
                       ))}
                     </div>
                     <div className="mt-4 pt-4 border-t border-border/50">
-                      <p className="text-muted-foreground text-xs">By {post.author}</p>
+                      <p className="text-muted-foreground text-xs">By {post.author.name}</p>
                     </div>
                   </div>
                 </Card>

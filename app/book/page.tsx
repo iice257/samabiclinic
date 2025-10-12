@@ -1,8 +1,7 @@
 "use client"
 
 import type React from "react"
-
-import { useState } from "react"
+import { useState, useMemo, useEffect } from "react"
 import { CalendarIcon, Clock, User, Mail, Phone, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
@@ -10,13 +9,36 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
-import { Calendar } from "@/components/ui/calendar"
-import { Popover, PopoverContent, PopoverTrigger } from "@/components/ui/popover"
-import { format } from "date-fns"
+import { format, parseISO, startOfWeek, endOfWeek, addDays, startOfDay, endOfDay } from "date-fns"
+import { enUS } from "date-fns/locale"
+
+import { Calendar, dateFnsLocalizer, Event } from "react-big-calendar"
+import "react-big-calendar/lib/css/react-big-calendar.css"
+
+const locales = {
+  "en-US": enUS,
+}
+
+const localizer = dateFnsLocalizer({
+  format,
+  parse: parseISO,
+  startOfWeek,
+  endOfWeek,
+  getDay: (date) => date.getDay(),
+  locales,
+})
+
+interface AppointmentEvent extends Event {
+  id: string;
+  patientId: string;
+  doctorId: string;
+  notes?: string;
+  status: string;
+}
 
 export default function BookingPage() {
-  const [date, setDate] = useState<Date>()
-  const [selectedTime, setSelectedTime] = useState<string>()
+  const [selectedDate, setSelectedDate] = useState<Date>(new Date())
+  const [selectedSlot, setSelectedSlot] = useState<{ start: Date; end: Date; doctorId: string } | null>(null)
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -24,17 +46,44 @@ export default function BookingPage() {
     service: "",
     message: "",
   })
+  const [events, setEvents] = useState<AppointmentEvent[]>([])
 
-  const availableTimes = [
-    "09:00 AM",
-    "10:00 AM",
-    "11:00 AM",
-    "12:00 PM",
-    "02:00 PM",
-    "03:00 PM",
-    "04:00 PM",
-    "05:00 PM",
-  ]
+  // Placeholder for available slots - in a real app, this would come from an API
+  const generateAvailableSlots = (date: Date) => {
+    const slots: AppointmentEvent[] = [];
+    const startHour = 9; // 9 AM
+    const endHour = 17; // 5 PM
+    const interval = 60; // 60 minutes
+
+    const currentDay = startOfDay(date);
+
+    for (let i = startHour; i < endHour; i++) {
+      const start = new Date(currentDay);
+      start.setHours(i, 0, 0, 0);
+      const end = new Date(start);
+      end.setMinutes(start.getMinutes() + interval);
+
+      // Only add slots in the future
+      if (start > new Date()) {
+        slots.push({
+          id: `slot-${start.getTime()}`,
+          title: "Available",
+          start,
+          end,
+          patientId: "", // Placeholder
+          doctorId: "clx0000000000000000000001", // Placeholder Doctor ID
+          status: "available",
+        });
+      }
+    }
+    return slots;
+  };
+
+  useEffect(() => {
+    // In a real application, you would fetch actual appointments for the selectedDate
+    // For now, we'll generate dummy available slots
+    setEvents(generateAvailableSlots(selectedDate));
+  }, [selectedDate]);
 
   const services = [
     "Initial Consultation",
@@ -45,16 +94,99 @@ export default function BookingPage() {
     "Stress & Sleep Optimization",
   ]
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    // Handle form submission
-    console.log("[v0] Booking submitted:", { ...formData, date, time: selectedTime })
-    alert("Booking request submitted! We'll contact you shortly to confirm your appointment.")
-  }
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    if (!selectedSlot) {
+      alert("Please select a date and time for your appointment.");
+      return;
+    }
+
+    // Assuming a fixed patientId for now. This would come from auth context.
+    const patientId = "clx0000000000000000000000"; // Placeholder Patient ID
+    const doctorId = selectedSlot.doctorId; // Get doctorId from the selected slot
+
+    const bookingData = {
+      patientId,
+      doctorId,
+      startTime: selectedSlot.start.toISOString(),
+      endTime: selectedSlot.end.toISOString(),
+      notes: formData.message,
+      // service: formData.service, // Service can be stored in notes or a separate field if needed
+    };
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/appointments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(bookingData),
+      });
+
+      if (!res.ok) {
+        const errorData = await res.json();
+        throw new Error(errorData.message || 'Failed to book appointment');
+      }
+
+      alert("Booking request submitted successfully! We'll contact you shortly to confirm your appointment.");
+      // Optionally reset form
+      setSelectedSlot(null);
+      setFormData({
+        name: "",
+        email: "",
+        phone: "",
+        service: "",
+        message: "",
+      });
+      // Refresh events to show the booked slot (in a real app, this would involve re-fetching from API)
+      setEvents(generateAvailableSlots(selectedDate));
+    } catch (error: any) {
+      console.error("Error booking appointment:", error);
+      alert(`Error booking appointment: ${error.message}`);
+    }
+  };
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
   }
+
+  const handleSelectSlot = ({ start, end }: { start: Date; end: Date }) => {
+    // Check if the selected slot is an available slot (not an existing event)
+    const isAvailable = events.some(
+      (event) => event.start.getTime() === start.getTime() && event.end.getTime() === end.getTime() && event.status === "available"
+    );
+
+    if (isAvailable) {
+      setSelectedSlot({ start, end, doctorId: "clx0000000000000000000001" }); // Assuming a default doctor for now
+    } else {
+      setSelectedSlot(null);
+      alert("This slot is not available or already booked.");
+    }
+  };
+
+  const handleSelectEvent = (event: AppointmentEvent) => {
+    if (event.status === "available") {
+      setSelectedSlot({ start: event.start, end: event.end, doctorId: event.doctorId });
+    } else {
+      setSelectedSlot(null);
+      alert("This slot is not available or already booked.");
+    }
+  };
+
+  const eventPropGetter = (event: AppointmentEvent) => {
+    const style = {
+      backgroundColor: event.status === "available" ? "#4CAF50" : "#F44336", // Green for available, Red for booked
+      borderRadius: "0px",
+      opacity: 0.8,
+      color: "white",
+      border: "0px",
+      display: "block",
+    };
+    return {
+      style: style,
+    };
+  };
 
   return (
     <main className="min-h-screen">
@@ -136,132 +268,117 @@ export default function BookingPage() {
                       <Label htmlFor="email" className="flex items-center gap-2">
                         <Mail className="h-4 w-4" />
                         Email *
-                      </Label>
-                      <Input
-                        id="email"
-                        type="email"
-                        placeholder="john@example.com"
-                        required
-                        value={formData.email}
-                        onChange={(e) => handleInputChange("email", e.target.value)}
-                        className="transition-all duration-300 focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="phone" className="flex items-center gap-2">
-                        <Phone className="h-4 w-4" />
-                        Phone Number *
-                      </Label>
-                      <Input
-                        id="phone"
-                        type="tel"
-                        placeholder="+234 800 000 0000"
-                        required
-                        value={formData.phone}
-                        onChange={(e) => handleInputChange("phone", e.target.value)}
-                        className="transition-all duration-300 focus:ring-2 focus:ring-primary"
-                      />
-                    </div>
-                  </div>
-                </div>
-
-                {/* Appointment Details */}
-                <div className="space-y-4 pt-6 border-t border-border">
-                  <h3 className="font-semibold text-foreground text-xl">Appointment Details</h3>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="service">Service Type *</Label>
-                    <Select
-                      value={formData.service}
-                      onValueChange={(value) => handleInputChange("service", value)}
-                      required
-                    >
-                      <SelectTrigger className="transition-all duration-300 focus:ring-2 focus:ring-primary">
-                        <SelectValue placeholder="Select a service" />
-                      </SelectTrigger>
-                      <SelectContent>
-                        {services.map((service) => (
-                          <SelectItem key={service} value={service}>
-                            {service}
-                          </SelectItem>
-                        ))}
-                      </SelectContent>
-                    </Select>
-                  </div>
-
-                  <div className="grid gap-4 md:grid-cols-2">
-                    <div className="space-y-2">
-                      <Label>Preferred Date *</Label>
-                      <Popover>
-                        <PopoverTrigger asChild>
-                          <Button
-                            variant="outline"
-                            className="w-full justify-start text-left font-normal transition-all duration-300 hover:bg-muted bg-transparent"
-                          >
-                            <CalendarIcon className="mr-2 h-4 w-4" />
-                            {date ? format(date, "PPP") : <span>Pick a date</span>}
-                          </Button>
-                        </PopoverTrigger>
-                        <PopoverContent className="w-auto p-0" align="start">
-                          <Calendar
-                            mode="single"
-                            selected={date}
-                            onSelect={setDate}
-                            disabled={(date) => date < new Date() || date.getDay() === 0 || date.getDay() === 6}
-                            initialFocus
-                          />
-                        </PopoverContent>
-                      </Popover>
-                    </div>
-
-                    <div className="space-y-2">
-                      <Label htmlFor="time">Preferred Time *</Label>
-                      <Select value={selectedTime} onValueChange={setSelectedTime} required>
-                        <SelectTrigger className="transition-all duration-300 focus:ring-2 focus:ring-primary">
-                          <SelectValue placeholder="Select a time" />
-                        </SelectTrigger>
-                        <SelectContent>
-                          {availableTimes.map((time) => (
-                            <SelectItem key={time} value={time}>
-                              {time}
-                            </SelectItem>
-                          ))}
-                        </SelectContent>
-                      </Select>
-                    </div>
-                  </div>
-
-                  <div className="space-y-2">
-                    <Label htmlFor="message" className="flex items-center gap-2">
-                      <MessageSquare className="h-4 w-4" />
-                      Additional Information
                     </Label>
-                    <Textarea
-                      id="message"
-                      placeholder="Tell us about your health concerns or any specific questions you have..."
-                      rows={4}
-                      value={formData.message}
-                      onChange={(e) => handleInputChange("message", e.target.value)}
-                      className="resize-none transition-all duration-300 focus:ring-2 focus:ring-primary"
+                    <Input
+                      id="email"
+                      type="email"
+                      placeholder="john@example.com"
+                      required
+                      value={formData.email}
+                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary"
+                    />
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="phone" className="flex items-center gap-2">
+                      <Phone className="h-4 w-4" />
+                      Phone Number *
+                    </Label>
+                    <Input
+                      id="phone"
+                      type="tel"
+                      placeholder="+234 800 000 0000"
+                      required
+                      value={formData.phone}
+                      onChange={(e) => handleInputChange("phone", e.target.value)}
+                      className="transition-all duration-300 focus:ring-2 focus:ring-primary"
                     />
                   </div>
                 </div>
+              </div>
 
-                {/* Submit Button */}
-                <div className="pt-6">
-                  <Button type="submit" size="lg" className="group w-full transition-all duration-300 hover:shadow-lg">
-                    Confirm Booking
-                    <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </Button>
-                  <p className="mt-4 text-center text-muted-foreground text-xs">
-                    By booking, you agree to our terms and privacy policy. We'll contact you to confirm your
-                    appointment.
-                  </p>
+              {/* Appointment Details */}
+              <div className="space-y-4 pt-6 border-t border-border">
+                <h3 className="font-semibold text-foreground text-xl">Appointment Details</h3>
+
+                <div className="space-y-2">
+                  <Label htmlFor="service">Service Type *</Label>
+                  <Select
+                    value={formData.service}
+                    onValueChange={(value) => handleInputChange("service", value)}
+                    required
+                  >
+                    <SelectTrigger className="transition-all duration-300 focus:ring-2 focus:ring-primary">
+                      <SelectValue placeholder="Select a service" />
+                    </SelectTrigger>
+                    <SelectContent>
+                      {services.map((service) => (
+                        <SelectItem key={service} value={service}>
+                          {service}
+                        </SelectItem>
+                      ))}
+                    </SelectContent>
+                  </Select>
                 </div>
-              </form>
-            </Card>
-          </div>
+
+                <div className="space-y-2">
+                  <Label>Select Date and Time *</Label>
+                  <div className="h-[500px] w-full">
+                    <Calendar
+                      localizer={localizer}
+                      events={events}
+                      startAccessor="start"
+                      endAccessor="end"
+                      selectable
+                      onSelectSlot={handleSelectSlot}
+                      onSelectEvent={handleSelectEvent}
+                      defaultView="week"
+                      views={["month", "week", "day"]}
+                      step={60}
+                      timeslots={1}
+                      min={new Date(0, 0, 0, 9, 0, 0)} // 9 AM
+                      max={new Date(0, 0, 0, 17, 0, 0)} // 5 PM
+                      eventPropGetter={eventPropGetter}
+                      style={{ height: "100%" }}
+                    />
+                  </div>
+                  {selectedSlot && (
+                    <p className="text-sm text-muted-foreground mt-2">
+                      Selected: {format(selectedSlot.start, "PPP p", { locale: enUS })} - {format(selectedSlot.end, "p", { locale: enUS })} (Doctor ID: {selectedSlot.doctorId})
+                    </p>
+                  )}
+                </div>
+
+                <div className="space-y-2">
+                  <Label htmlFor="message" className="flex items-center gap-2">
+                    <MessageSquare className="h-4 w-4" />
+                    Additional Information
+                  </Label>
+                  <Textarea
+                    id="message"
+                    placeholder="Tell us about your health concerns or any specific questions you have..."
+                    rows={4}
+                    value={formData.message}
+                    onChange={(e) => handleInputChange("message", e.target.value)}
+                    className="resize-none transition-all duration-300 focus:ring-2 focus:ring-primary"
+                  />
+                </div>
+              </div>
+
+              {/* Submit Button */}
+              <div className="pt-6">
+                <Button type="submit" size="lg" className="group w-full transition-all duration-300 hover:shadow-lg">
+                  Confirm Booking
+                  <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Button>
+                <p className="mt-4 text-center text-muted-foreground text-xs">
+                  By booking, you agree to our terms and privacy policy. We'll contact you to confirm your
+                  appointment.
+                </p>
+              </div>
+            </form>
+          </Card>
         </div>
       </section>
 

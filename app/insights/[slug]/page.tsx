@@ -5,23 +5,64 @@ import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock, ArrowLeft } from "lucide-react"
-import { getBlogPost, getAllBlogPosts } from "@/lib/data/blog-posts"
 import ReactMarkdown from "react-markdown"
 
+interface BlogPost {
+  id: string;
+  title: string;
+  slug: string;
+  content: string;
+  excerpt?: string;
+  image?: string;
+  readTime?: string;
+  tags: string[];
+  published: boolean;
+  author: {
+    name: string;
+  };
+  category: {
+    name: string;
+  };
+  createdAt: string;
+  updatedAt: string;
+}
+
+async function getBlogPostBySlug(slug: string): Promise<BlogPost | null> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/posts/${slug}`, {
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    if (res.status === 404) {
+      return null;
+    }
+    throw new Error('Failed to fetch blog post');
+  }
+  return res.json();
+}
+
+async function getAllBlogPostSlugs(): Promise<{ slug: string }[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/blog/posts`, {
+    cache: 'no-store',
+  });
+  if (!res.ok) {
+    throw new Error('Failed to fetch blog post slugs');
+  }
+  const posts: BlogPost[] = await res.json();
+  return posts.map((post) => ({ slug: post.slug }));
+}
+
 export async function generateStaticParams() {
-  const posts = getAllBlogPosts()
-  return posts.map((post) => ({
-    slug: post.slug,
-  }))
+  const slugs = await getAllBlogPostSlugs();
+  return slugs;
 }
 
 export async function generateMetadata({ params }: { params: { slug: string } }): Promise<Metadata> {
-  const post = getBlogPost(params.slug)
+  const post = await getBlogPostBySlug(params.slug);
 
   if (!post) {
     return {
       title: "Post Not Found | Samabi Functional Medicine",
-    }
+    };
   }
 
   return {
@@ -31,17 +72,17 @@ export async function generateMetadata({ params }: { params: { slug: string } })
       title: `${post.title} | Samabi Functional Medicine`,
       description: post.excerpt,
       type: "article",
-      publishedTime: post.date,
-      authors: [post.author],
+      publishedTime: post.createdAt,
+      authors: [post.author.name],
     },
-  }
+  };
 }
 
-export default function BlogPostPage({ params }: { params: { slug: string } }) {
-  const post = getBlogPost(params.slug)
+export default async function BlogPostPage({ params }: { params: { slug: string } }) {
+  const post = await getBlogPostBySlug(params.slug);
 
   if (!post) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -58,7 +99,7 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               Back to Insights
             </Link>
             <div className="mb-4">
-              <Badge className="bg-primary">{post.category}</Badge>
+              <Badge className="bg-primary">{post.category.name}</Badge>
             </div>
             <h1 className="mb-6 text-balance font-bold text-3xl text-foreground md:text-4xl lg:text-5xl">
               {post.title}
@@ -67,14 +108,14 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
               <div className="flex items-center gap-2">
                 <Calendar className="h-4 w-4" />
                 <span>
-                  {new Date(post.date).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
+                  {new Date(post.createdAt).toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric" })}
                 </span>
               </div>
               <div className="flex items-center gap-2">
                 <Clock className="h-4 w-4" />
-                <span>{post.readTime}</span>
+                <span>{post.readTime || "5 min read"}</span>
               </div>
-              <div>By {post.author}</div>
+              <div>By {post.author.name}</div>
             </div>
           </div>
         </div>
@@ -155,5 +196,5 @@ export default function BlogPostPage({ params }: { params: { slug: string } }) {
         </div>
       </section>
     </main>
-  )
+  );
 }

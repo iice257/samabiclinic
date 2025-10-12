@@ -6,6 +6,7 @@ import "./globals.css"
 import { Navbar } from "@/components/layout/navbar"
 import { Footer } from "@/components/layout/footer"
 import { Suspense } from "react"
+import { AuthProvider } from "@/hooks/useAuth" // Import AuthProvider
 
 const inter = Inter({
   subsets: ["latin"],
@@ -50,12 +51,14 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-        <Suspense fallback={<div>Loading...</div>}>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
-          <Analytics />
-        </Suspense>
+        <AuthProvider> {/* Wrap the application with AuthProvider */}
+          <Suspense fallback={<div>Loading...</div>}>
+            <Navbar />
+            <main>{children}</main>
+            <Footer />
+            <Analytics />
+          </Suspense>
+        </AuthProvider>
       </body>
     </html>
   )

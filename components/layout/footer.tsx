@@ -1,3 +1,6 @@
+"use client"
+
+import { useState } from "react"
 import Link from "next/link"
 import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react"
 import { Button } from "@/components/ui/button"
@@ -5,6 +8,36 @@ import { Input } from "@/components/ui/input"
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
+  const [newsletterEmail, setNewletterEmail] = useState("")
+  const [isSubmittingNewsletter, setIsSubmittingNewsletter] = useState(false)
+
+  const handleNewsletterSubmit = async (e: React.FormEvent) => {
+    e.preventDefault()
+    setIsSubmittingNewsletter(true)
+
+    try {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BASE_URL}/api/newsletter/subscribe`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ email: newsletterEmail }),
+      })
+
+      if (!res.ok) {
+        const errorData = await res.json()
+        throw new Error(errorData.message || "Failed to subscribe to newsletter")
+      }
+
+      alert("Successfully subscribed to our newsletter!")
+      setNewletterEmail("")
+    } catch (error: any) {
+      console.error("Error subscribing to newsletter:", error)
+      alert(`Error: ${error.message}`)
+    } finally {
+      setIsSubmittingNewsletter(false)
+    }
+  }
 
   return (
     <footer className="bg-card border-t border-border">
@@ -48,7 +81,7 @@ export function Footer() {
               {["About Us", "Services", "Treatments", "Insights", "Contact"].map((item) => (
                 <li key={item}>
                   <Link
-                    href={`/${item.toLowerCase().replace(" ", "-")}`}
+                    href={item === "About Us" ? "/about" : `/${item.toLowerCase().replace(" ", "-")}`}
                     className="text-muted-foreground hover:text-foreground transition-colors text-sm"
                   >
                     {item}
@@ -95,10 +128,17 @@ export function Footer() {
             <p className="text-muted-foreground text-sm mb-4">
               Subscribe to our newsletter for health tips and updates.
             </p>
-            <form className="space-y-2">
-              <Input type="email" placeholder="Your email" className="rounded-full" />
-              <Button type="submit" className="w-full rounded-full">
-                Subscribe
+            <form onSubmit={handleNewsletterSubmit} className="space-y-2">
+              <Input
+                type="email"
+                placeholder="Your email"
+                className="rounded-full"
+                value={newsletterEmail}
+                onChange={(e) => setNewletterEmail(e.target.value)}
+                required
+              />
+              <Button type="submit" className="w-full rounded-full" disabled={isSubmittingNewsletter}>
+                {isSubmittingNewsletter ? "Subscribing..." : "Subscribe"}
               </Button>
             </form>
           </div>
