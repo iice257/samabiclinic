@@ -1,7 +1,6 @@
 "use client";
 
-import React, { createContext, useContext, useState, useEffect, use } from 'react';
-import { useRouter } from 'next/navigation';
+import React, { createContext, useContext, import { useRouter } from 'next/navigation';
 import { User } from '@supabase/supabase-js';
 import { supabaseClient } from '@/lib/client/supabase'; // Adjust path as needed
 
