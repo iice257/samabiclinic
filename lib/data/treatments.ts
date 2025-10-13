@@ -7,6 +7,8 @@ export interface Treatment {
   image: string
   duration: string
   price: string
+  addresses: string[]
+  includes: string[]
   benefits: string[]
   process: {
     step: number
@@ -28,6 +30,25 @@ export const treatments: Treatment[] = [
     image: "/gut-health-digestive-wellness-functional-medicine.jpg",
     duration: "12-16 weeks",
     price: "Contact for pricing",
+    addresses: [
+      "Chronic bloating and gas",
+      "Irritable Bowel Syndrome (IBS)",
+      "Food sensitivities and intolerances",
+      "Leaky gut syndrome",
+      "Chronic constipation or diarrhea",
+      "Inflammatory bowel conditions",
+      "Poor nutrient absorption",
+      "Systemic inflammation",
+    ],
+    includes: [
+      "Comprehensive stool analysis and microbiome testing",
+      "Food sensitivity testing panel",
+      "Personalized elimination diet protocol",
+      "Targeted probiotic and supplement recommendations",
+      "Weekly progress monitoring and adjustments",
+      "Gut-healing meal plans and recipes",
+      "Ongoing email and messaging support",
+    ],
     benefits: [
       "Improved digestion and reduced bloating",
       "Enhanced nutrient absorption and energy levels",
@@ -85,6 +106,26 @@ export const treatments: Treatment[] = [
     image: "/hormonal-balance-wellness-natural-health.jpg",
     duration: "12-16 weeks",
     price: "Contact for pricing",
+    addresses: [
+      "Thyroid dysfunction (hypo/hyperthyroidism)",
+      "Adrenal fatigue and cortisol imbalances",
+      "Sex hormone imbalances (estrogen, progesterone, testosterone)",
+      "PMS and menstrual irregularities",
+      "Menopausal and perimenopausal symptoms",
+      "PCOS and fertility challenges",
+      "Low libido and sexual dysfunction",
+      "Unexplained weight gain or difficulty losing weight",
+    ],
+    includes: [
+      "Comprehensive hormone panel testing",
+      "Thyroid function assessment (TSH, T3, T4, antibodies)",
+      "Cortisol rhythm analysis",
+      "Sex hormone testing",
+      "Personalized nutrition and supplement protocol",
+      "Stress management and lifestyle coaching",
+      "Bi-weekly progress consultations",
+      "Follow-up testing to track improvements",
+    ],
     benefits: [
       "Balanced energy levels throughout the day",
       "Improved mood stability and mental clarity",
@@ -141,6 +182,26 @@ export const treatments: Treatment[] = [
     image: "/chronic-fatigue-recovery-energy-restoration.jpg",
     duration: "16-20 weeks",
     price: "Contact for pricing",
+    addresses: [
+      "Persistent exhaustion despite adequate rest",
+      "Chronic Fatigue Syndrome (CFS/ME)",
+      "Post-viral fatigue and long COVID",
+      "Mitochondrial dysfunction",
+      "Fibromyalgia-related fatigue",
+      "Adrenal exhaustion and burnout",
+      "Brain fog and cognitive fatigue",
+      "Exercise intolerance and post-exertional malaise",
+    ],
+    includes: [
+      "Comprehensive fatigue assessment and health history",
+      "Mitochondrial function testing",
+      "Complete hormone panel",
+      "Nutrient deficiency screening",
+      "Immune system and infection markers",
+      "Personalized energy restoration protocol",
+      "Mitochondrial support supplementation",
+      "Weekly monitoring and protocol adjustments",
+    ],
     benefits: [
       "Restored natural energy and stamina",
       "Improved mental clarity and focus",
@@ -199,6 +260,26 @@ export const treatments: Treatment[] = [
     image: "/stress-management-sleep-optimization-wellness.jpg",
     duration: "12-14 weeks",
     price: "Contact for pricing",
+    addresses: [
+      "Chronic insomnia and difficulty falling asleep",
+      "Frequent night waking and poor sleep quality",
+      "Racing thoughts and bedtime anxiety",
+      "Chronic stress and overwhelm",
+      "Burnout and emotional exhaustion",
+      "Disrupted circadian rhythms",
+      "Morning fatigue despite sleeping",
+      "Stress-related health issues",
+    ],
+    includes: [
+      "Sleep quality and pattern assessment",
+      "Cortisol rhythm testing",
+      "Neurotransmitter analysis",
+      "Personalized sleep optimization protocol",
+      "Stress management techniques and tools",
+      "Targeted supplements for sleep and stress",
+      "Circadian rhythm restoration strategies",
+      "Weekly coaching and support sessions",
+    ],
     benefits: [
       "Deeper, more restorative sleep",
       "Improved stress resilience and emotional balance",
