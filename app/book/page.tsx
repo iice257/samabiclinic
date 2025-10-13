@@ -48,7 +48,7 @@ export default function BookingPage() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission
-    console.log("[v0] Booking submitted:", { ...formData, date, time: selectedTime })
+    console.log("Booking submitted:", { ...formData, date, time: selectedTime })
     alert("Booking request submitted! We'll contact you shortly to confirm your appointment.")
   }
 
@@ -77,36 +77,44 @@ export default function BookingPage() {
         <div className="container mx-auto max-w-5xl">
           <div className="grid gap-8 lg:grid-cols-3">
             {/* Left Column - Info Cards */}
-            <div className="space-y-6 lg:col-span-1">
+            <div className="space-y-8 lg:col-span-1">
               <Card className="border-border/50 bg-card p-6 animate-in fade-in slide-in-from-left-8 duration-1000">
-                <div className="mb-4 inline-flex rounded-full bg-primary/10 p-3">
+                <div className="mb-4 gap-4 inline-flex rounded-full bg-primary/10 p-3">
                   <CalendarIcon className="h-6 w-6 text-primary" />
+                  <h3 className="font-semibold text-foreground text-lg">Flexible Scheduling</h3>
                 </div>
-                <h3 className="mb-2 font-semibold text-foreground text-lg">Flexible Scheduling</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   Choose a date and time that works best for your schedule. We offer appointments throughout the week.
                 </p>
               </Card>
 
               <Card className="border-border/50 bg-card p-6 animate-in fade-in slide-in-from-left-8 duration-1000 delay-100">
-                <div className="mb-4 inline-flex rounded-full bg-accent/10 p-3">
-                  <Clock className="h-6 w-6 text-accent" />
+                <div className="mb-4 gap-4 inline-flex rounded-full bg-primary/10 p-3">
+                  <Clock className="h-6 w-6 text-primary" />
+                  <h3 className="font-semibold text-foreground text-lg">60-Minute Sessions</h3>
                 </div>
-                <h3 className="mb-2 font-semibold text-foreground text-lg">60-Minute Sessions</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   Initial consultations are comprehensive 60-minute sessions to fully understand your health concerns.
                 </p>
               </Card>
 
               <Card className="border-border/50 bg-card p-6 animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
-                <div className="mb-4 inline-flex rounded-full bg-primary/10 p-3">
+                <div className="mb-4 gap-4 inline-flex rounded-full bg-primary/10 p-3">
                   <User className="h-6 w-6 text-primary" />
+                  <h3 className="font-semibold text-foreground text-lg">Expert Care</h3>
                 </div>
-                <h3 className="mb-2 font-semibold text-foreground text-lg">Expert Care</h3>
                 <p className="text-muted-foreground text-sm leading-relaxed">
                   Meet with our experienced functional medicine specialists who will create a personalized care plan.
                 </p>
               </Card>
+              <Card className="border-border/50 bg-card p-4 animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
+              <p className="text-muted-foreground text-xs">
+                For enquiries, 
+                <a href="/contact" className="transition-colors underline hover:text-primary">
+                  contact us.
+                </a>
+              </p>
+              </Card>    
             </div>
 
             {/* Right Column - Booking Form */}

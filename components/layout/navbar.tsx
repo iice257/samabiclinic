@@ -29,8 +29,8 @@ export function Navbar() {
   const navLinks = [
     { href: "/", label: "Home" },
     { href: "/services", label: "Services" },
-    { href: "/bookings", label: "Treatments and Bookings" },
-    { href: "/blog", label: "Blog " },
+    { href: "/treatments", label: "Treatments and Bookings" },
+    { href: "/insights", label: "Blog " },
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ]
@@ -44,7 +44,7 @@ export function Navbar() {
 
   return (
     <nav
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-background/90 backdrop-blur-lg shadow-sm" : "backdrop-blur-lg"
       }`}
     >
@@ -84,7 +84,7 @@ export function Navbar() {
               {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
             </Button>
             <Button asChild className="rounded-full">
-              <Link href="/bookings">Book Consultation</Link>
+              <Link href="/book">Book Consultation</Link>
             </Button>
           </div>
 

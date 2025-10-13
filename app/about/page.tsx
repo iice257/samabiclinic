@@ -75,7 +75,7 @@ export default function AboutPage() {
           <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h2 className="mb-4 font-bold text-3xl text-foreground md:text-4xl">Meet Our Founder</h2>
             <p className="mx-auto max-w-2xl text-balance text-muted-foreground text-lg">
-              Expert clinician dedicated to your health and wellbeing.
+              The Expert.
             </p>
           </div>
 
@@ -130,7 +130,7 @@ export default function AboutPage() {
             {/* Value 2 */}
             <Card className="flex flex-col items-center group border-border/50 bg-card p-8 text-center transition-all hover:shadow-lg hover:-translate-y-1 animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-300">
               <div className="mb-6 inline-flex rounded-full bg-accent/10 p-4 transition-colors duration-300 group-hover:bg-accent/20">
-                <Sparkles className="h-8 w-8 text-accent" />
+                <Sparkles className="h-8 w-8 text-primary" />
               </div>
               <h3 className="mb-6 font-semibold text-foreground text-xl">Personalized Care</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
