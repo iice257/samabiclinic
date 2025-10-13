@@ -104,13 +104,13 @@ Both support serverless functions for booking form handling.
 
 Steps:
 
-```bash
+\`\`\`bash
 # Vercel
 vercel
 
 # Netlify
 netlify deploy
-```
+\`\`\`
 
 ---
 
@@ -162,9 +162,9 @@ netlify deploy
 
 © 2025 Samabi Functional Medicine Clinic. All rights reserved.
 
-```
+\`\`\`
 
 ---
 
 Would you like me to **add real badge-style sections** (build status, license, framework, etc.) at the top of the README to make it more “open-source polished”? Or should I keep it **client-facing clean** for the clinic team?
-```
+\`\`\`

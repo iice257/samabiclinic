@@ -39,6 +39,7 @@ export const metadata: Metadata = {
     title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Lagos",
     description: "Transform your health with personalized functional medicine.",
   },
+    generator: 'v0.app'
 }
 
 export default function RootLayout({
