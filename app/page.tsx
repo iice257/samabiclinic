@@ -65,7 +65,11 @@ export default function HomePage() {
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="relative order-2 lg:order-1">
               <div className="aspect-[4/3] rounded-2xl overflow-hidden bg-muted">
-                <img src="/doctor-consultation-functional-medicine.jpg" alt="Our philosophy" className="w-full h-full object-cover" />
+                <img
+                  src="/doctor-consultation-functional-medicine.jpg"
+                  alt="Our philosophy"
+                  className="w-full h-full object-cover"
+                />
               </div>
             </div>
             <div className="space-y-6 order-1 lg:order-2">
@@ -73,8 +77,8 @@ export default function HomePage() {
                 Healthcare That Sees the Whole You
               </h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                At Samabi Functional Medicine Clinic, we believe your body is an interconnected system. We don't just treat symptoms,we investigate
-                the root causes of your health challenges.
+                At Samabi Functional Medicine Clinic, we believe your body is an interconnected system. We don't just
+                treat symptoms,we investigate the root causes of your health challenges.
               </p>
               <ul className="space-y-4">
                 {[
@@ -178,27 +182,47 @@ export default function HomePage() {
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {[
               {
+                number: 1,
                 quote:
                   "After years of digestive issues, Dr. Abimbola Kazeem's approach finally gave me answers. I feel like myself again.",
                 author: "Chioma O.",
                 role: "Lagos",
               },
               {
+                number: 2,
                 quote:
                   "The personalized care I received was life-changing. My energy levels are better than they've been in a decade.",
                 author: "Tunde A.",
                 role: "Abuja",
               },
               {
+                number: 3,
                 quote:
-                  "Samabi doesn't just treat symptoms,they helped me understand my body and take control of my health.",
+                  "Samabi doesn't just treat symptoms—they helped me understand my body and take control of my health.",
                 author: "Amara N.",
                 role: "Port Harcourt",
               },
-            ].map((testimonial, index) => (
-              <Card key={index} className="border-border">
+            ].map((testimonial) => (
+              <Card key={testimonial.number} className="border-border relative">
                 <CardContent className="p-8 space-y-4">
-                  <p className="text-foreground leading-relaxed italic">"{testimonial.quote}"</p>
+                  <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
+                    <span className="text-primary font-bold text-lg">{testimonial.number}</span>
+                  </div>
+                  <p className="text-foreground leading-relaxed italic">
+                    {testimonial.quote.includes("years") ? (
+                      <>
+                        After <span className="font-bold">years</span> of digestive issues, Dr. Abimbola Kazeem's
+                        approach finally gave me answers. I feel like myself again.
+                      </>
+                    ) : testimonial.quote.includes("decade") ? (
+                      <>
+                        The personalized care I received was life-changing. My energy levels are better than they've
+                        been in <span className="font-bold">a decade</span>.
+                      </>
+                    ) : (
+                      testimonial.quote
+                    )}
+                  </p>
                   <div className="pt-4 border-t border-border">
                     <p className="font-semibold text-foreground">{testimonial.author}</p>
                     <p className="text-sm text-muted-foreground">{testimonial.role}</p>

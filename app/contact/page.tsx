@@ -187,39 +187,65 @@ export default function ContactPage() {
                     className="resize-none transition-all duration-300 focus:ring-2 focus:ring-primary"
                   />
                 </div>
-                <Button type="submit" size="lg" className="group rounded-full w-full transition-all duration-300 hover:shadow-lg">
+                <Button
+                  type="submit"
+                  size="lg"
+                  className="group rounded-full w-full transition-all duration-300 hover:shadow-lg"
+                >
                   <Send className="mr-2 h-5 w-5" />
                   Send Message
                 </Button>
-                </form>
-                <div className="mt-10 p-3 flex-col">
-                  <h3 className="mt-2 mb-4 font-bold text-2xl text-foreground">Or Book an Appointment</h3>
-                  <h3 className="font-semibold text-foreground text-lg">Prefer to speak directly with a specialist?</h3>
-                  <p className="text-muted-foreground text-sm pb-6">
-                    Skip the wait. Schedule a personalised consultation with our functional medicine team. Wether you're seeking guidance, a treatment plan, or a second opinion, we'll help you take the next step toward lasting welness.
-                  </p>
-                  <Button type="submit" size="lg" className="group rounded-full w-full transition-all duration-300 hover:shadow-lg">
-                    <Link href="/book">Book Consultation</Link>
-                    <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-                  </Button>
-                  </div>
+              </form>
             </Card>
           </div>
         </div>
       </section>
 
-      {/* Map Section */}
-      <section className="bg-muted/30 px-4 py-16">
+      <section className="px-4 py-16 bg-muted/30">
+        <div className="container mx-auto max-w-6xl">
+          <Card className="border-border/50 bg-card p-8 md:p-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
+            <div className="max-w-3xl mx-auto text-center space-y-6">
+              <h2 className="font-bold text-3xl text-foreground md:text-4xl">Book an Appointment</h2>
+              <div className="space-y-4">
+                <h3 className="font-semibold text-foreground text-xl">Prefer to speak directly with a specialist?</h3>
+                <p className="text-muted-foreground leading-relaxed">
+                  Skip the wait. Schedule a personalised consultation with our functional medicine team. Whether you're
+                  seeking guidance, a treatment plan, or a second opinion, we'll help you take the next step toward
+                  lasting wellness.
+                </p>
+              </div>
+              <Button size="lg" className="group rounded-full transition-all duration-300 hover:shadow-lg" asChild>
+                <Link href="/book">
+                  Book Consultation
+                  <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                </Link>
+              </Button>
+            </div>
+          </Card>
+        </div>
+      </section>
+
+      <section className="bg-background px-4 py-16">
         <div className="container mx-auto max-w-6xl">
           <div className="overflow-hidden rounded-2xl animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <div className="relative aspect-[21/9] bg-muted">
-              <div className="flex h-full items-center justify-center">
-                <div className="text-center">
-                  <MapPin className="mx-auto mb-4 h-12 w-12 text-muted-foreground" />
-                  <p className="text-muted-foreground">Map integration placeholder</p>
-                  <p className="mt-2 text-muted-foreground text-sm">123 Wellness Avenue, Victoria Island, Lagos</p>
-                </div>
-              </div>
+              <iframe
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3975.6847234567!2d7.0123456!3d4.8456789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNMKwNTAnNDQuNCJOIDfCsDAwJzQ0LjQiRQ!5e0!3m2!1sen!2sng!4v1234567890"
+                width="100%"
+                height="100%"
+                style={{ border: 0 }}
+                allowFullScreen
+                loading="lazy"
+                referrerPolicy="no-referrer-when-downgrade"
+                title="Samabi Functional Medicine Clinic Location"
+                className="absolute inset-0"
+              />
+            </div>
+            <div className="bg-card p-4 text-center border-t border-border">
+              <p className="text-muted-foreground text-sm">
+                <MapPin className="inline h-4 w-4 mr-1" />
+                No 5 Isaac Ken Close, Off farm Road, Rumuosi Portharcourt
+              </p>
             </div>
           </div>
         </div>
