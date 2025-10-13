@@ -62,7 +62,7 @@ export default function ContactPage() {
               </div>
 
               <Card className="border-border/50 bg-card p-6 transition-all hover:shadow-lg animate-in fade-in slide-in-from-left-8 duration-1000 delay-100">
-                <div className="inline-flex rounded-full  p-3">
+                <div className="inline-flex rounded-full p-3">
                   <MapPin className="h-6 w-6 text-primary" />
                 </div>
                 <h3 className="font-semibold text-foreground">Visit Us</h3>
@@ -76,10 +76,10 @@ export default function ContactPage() {
               </Card>
 
               <Card className="border-border/50 bg-card p-6 transition-all hover:shadow-lg animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
-                <div className=" inline-flex rounded-full  p-3">
+                <div className="inline-flex rounded-full p-3">
                   <Phone className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className=" font-semibold text-foreground">Call Us</h3>
+                <h3 className="font-semibold text-foreground">Call Us</h3>
                 <p className="text-muted-foreground text-sm">
                   <a href="tel:+2348166423218" className="transition-colors hover:text-primary">
                     +234 816 642 3218
@@ -88,22 +88,22 @@ export default function ContactPage() {
               </Card>
 
               <Card className="border-border/50 bg-card p-6 transition-all hover:shadow-lg animate-in fade-in slide-in-from-left-8 duration-1000 delay-300">
-                <div className=" inline-flex rounded-full  p-3">
+                <div className="inline-flex rounded-full p-3">
                   <Mail className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className=" font-semibold text-foreground">Email Us</h3>
+                <h3 className="font-semibold text-foreground">Email Us</h3>
                 <p className="text-muted-foreground text-sm">
-                  <a href="mailto:mailto:Kazeem.uthman@npmcn.com" className="transition-colors hover:text-primary">
+                  <a href="mailto:Kazeem.uthman@npmcn.com" className="transition-colors hover:text-primary">
                     Kazeem.uthman@npmcn.com
                   </a>
                 </p>
               </Card>
 
               <Card className="border-border/50 bg-card p-6 transition-all hover:shadow-lg animate-in fade-in slide-in-from-left-8 duration-1000 delay-400">
-                <div className=" inline-flex rounded-full  p-3">
+                <div className="inline-flex rounded-full p-3">
                   <Clock className="h-6 w-6 text-primary" />
                 </div>
-                <h3 className=" font-semibold text-foreground">Office Hours</h3>
+                <h3 className="font-semibold text-foreground">Office Hours</h3>
                 <div className="space-y-1 text-muted-foreground text-sm">
                   <p>Monday - Friday: 8:00 AM - 5:00 PM</p>
                   <p>Saturday: 10:00 AM - 2:00 PM</p>
@@ -112,119 +112,122 @@ export default function ContactPage() {
               </Card>
             </div>
 
-            {/* Right Column - Contact Form */}
-            <Card className="border-border/50 bg-card p-8 lg:col-span-3 animate-in fade-in slide-in-from-right-8 duration-1000">
-              <h3 className="mb-6 font-bold text-2xl text-foreground">Send Us a Message</h3>
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div className="space-y-2">
-                  <Label htmlFor="name">Full Name *</Label>
-                  <Input
-                    id="name"
-                    placeholder="John Doe"
-                    required
-                    value={formData.name}
-                    onChange={(e) => handleInputChange("name", e.target.value)}
-                    className="transition-all duration-300 focus:ring-2 focus:ring-primary"
-                  />
-                </div>
-
-                <div className="grid gap-4 md:grid-cols-2">
+            {/* Right Column - Contact Form and Book Appointment */}
+            <div className="space-y-8 lg:col-span-3">
+              {/* Contact Form */}
+              <Card className="border-border/50 bg-card p-8 animate-in fade-in slide-in-from-right-8 duration-1000">
+                <h3 className="mb-6 font-bold text-2xl text-foreground">Send Us a Message</h3>
+                <form onSubmit={handleSubmit} className="space-y-6">
                   <div className="space-y-2">
-                    <Label htmlFor="email">Email *</Label>
+                    <Label htmlFor="name">Full Name *</Label>
                     <Input
-                      id="email"
-                      type="email"
-                      placeholder="john@example.com"
+                      id="name"
+                      placeholder="John Doe"
                       required
-                      value={formData.email}
-                      onChange={(e) => handleInputChange("email", e.target.value)}
+                      value={formData.name}
+                      onChange={(e) => handleInputChange("name", e.target.value)}
                       className="transition-all duration-300 focus:ring-2 focus:ring-primary"
                     />
+                  </div>
+
+                  <div className="grid gap-4 md:grid-cols-2">
+                    <div className="space-y-2">
+                      <Label htmlFor="email">Email *</Label>
+                      <Input
+                        id="email"
+                        type="email"
+                        placeholder="john@example.com"
+                        required
+                        value={formData.email}
+                        onChange={(e) => handleInputChange("email", e.target.value)}
+                        className="transition-all duration-300 focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
+
+                    <div className="space-y-2">
+                      <Label htmlFor="phone">Phone Number</Label>
+                      <Input
+                        id="phone"
+                        type="tel"
+                        placeholder="+234 800 000 0000"
+                        value={formData.phone}
+                        onChange={(e) => handleInputChange("phone", e.target.value)}
+                        className="transition-all duration-300 focus:ring-2 focus:ring-primary"
+                      />
+                    </div>
                   </div>
 
                   <div className="space-y-2">
-                    <Label htmlFor="phone">Phone Number</Label>
-                    <Input
-                      id="phone"
-                      type="tel"
-                      placeholder="+234 800 000 0000"
-                      value={formData.phone}
-                      onChange={(e) => handleInputChange("phone", e.target.value)}
-                      className="transition-all duration-300 focus:ring-2 focus:ring-primary"
+                    <Label htmlFor="subject">Subject *</Label>
+                    <Select
+                      value={formData.subject}
+                      onValueChange={(value) => handleInputChange("subject", value)}
+                      required
+                    >
+                      <SelectTrigger className="transition-all duration-300 focus:ring-2 focus:ring-primary">
+                        <SelectValue placeholder="Select a subject" />
+                      </SelectTrigger>
+                      <SelectContent>
+                        <SelectItem value="consultation">Book a Consultation</SelectItem>
+                        <SelectItem value="services">Questions About Services</SelectItem>
+                        <SelectItem value="treatments">Treatment Inquiries</SelectItem>
+                        <SelectItem value="billing">Billing & Insurance</SelectItem>
+                        <SelectItem value="other">Other</SelectItem>
+                      </SelectContent>
+                    </Select>
+                  </div>
+
+                  <div className="space-y-2">
+                    <Label htmlFor="message">Message *</Label>
+                    <Textarea
+                      id="message"
+                      placeholder="Tell us how we can help you..."
+                      rows={6}
+                      required
+                      value={formData.message}
+                      onChange={(e) => handleInputChange("message", e.target.value)}
+                      className="resize-none transition-all duration-300 focus:ring-2 focus:ring-primary"
                     />
                   </div>
-                </div>
-
-                <div className="space-y-2">
-                  <Label htmlFor="subject">Subject *</Label>
-                  <Select
-                    value={formData.subject}
-                    onValueChange={(value) => handleInputChange("subject", value)}
-                    required
+                  <Button
+                    type="submit"
+                    size="lg"
+                    className="group rounded-full w-full transition-all duration-300 hover:shadow-lg"
                   >
-                    <SelectTrigger className="transition-all duration-300 focus:ring-2 focus:ring-primary">
-                      <SelectValue placeholder="Select a subject" />
-                    </SelectTrigger>
-                    <SelectContent>
-                      <SelectItem value="consultation">Book a Consultation</SelectItem>
-                      <SelectItem value="services">Questions About Services</SelectItem>
-                      <SelectItem value="treatments">Treatment Inquiries</SelectItem>
-                      <SelectItem value="billing">Billing & Insurance</SelectItem>
-                      <SelectItem value="other">Other</SelectItem>
-                    </SelectContent>
-                  </Select>
-                </div>
+                    <Send className="mr-2 h-5 w-5" />
+                    Send Message
+                  </Button>
+                </form>
+              </Card>
 
-                <div className="space-y-2">
-                  <Label htmlFor="message">Message *</Label>
-                  <Textarea
-                    id="message"
-                    placeholder="Tell us how we can help you..."
-                    rows={6}
-                    required
-                    value={formData.message}
-                    onChange={(e) => handleInputChange("message", e.target.value)}
-                    className="resize-none transition-all duration-300 focus:ring-2 focus:ring-primary"
-                  />
+              {/* Book Appointment Card - Now directly below form */}
+              <Card className="border-border/50 bg-card p-8 animate-in fade-in slide-in-from-right-8 duration-1000 delay-200">
+                <div className="text-center space-y-6">
+                  <h3 className="font-bold text-2xl text-foreground md:text-3xl">Book an Appointment</h3>
+                  <div className="space-y-4">
+                    <h4 className="font-semibold text-foreground text-lg">
+                      Prefer to speak directly with a specialist?
+                    </h4>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Skip the wait. Schedule a personalised consultation with our functional medicine team. Whether
+                      you're seeking guidance, a treatment plan, or a second opinion, we'll help you take the next step
+                      toward lasting wellness.
+                    </p>
+                  </div>
+                  <Button size="lg" className="group rounded-full transition-all duration-300 hover:shadow-lg" asChild>
+                    <Link href="/book">
+                      Book Consultation
+                      <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
+                    </Link>
+                  </Button>
                 </div>
-                <Button
-                  type="submit"
-                  size="lg"
-                  className="group rounded-full w-full transition-all duration-300 hover:shadow-lg"
-                >
-                  <Send className="mr-2 h-5 w-5" />
-                  Send Message
-                </Button>
-              </form>
-            </Card>
+              </Card>
+            </div>
           </div>
         </div>
       </section>
 
-      <section className="px-4 py-16 bg-muted/30">
-        <div className="container mx-auto max-w-6xl">
-          <Card className="border-border/50 bg-card p-8 md:p-12 animate-in fade-in slide-in-from-bottom-4 duration-1000">
-            <div className="max-w-3xl mx-auto text-center space-y-6">
-              <h2 className="font-bold text-3xl text-foreground md:text-4xl">Book an Appointment</h2>
-              <div className="space-y-4">
-                <h3 className="font-semibold text-foreground text-xl">Prefer to speak directly with a specialist?</h3>
-                <p className="text-muted-foreground leading-relaxed">
-                  Skip the wait. Schedule a personalised consultation with our functional medicine team. Whether you're
-                  seeking guidance, a treatment plan, or a second opinion, we'll help you take the next step toward
-                  lasting wellness.
-                </p>
-              </div>
-              <Button size="lg" className="group rounded-full transition-all duration-300 hover:shadow-lg" asChild>
-                <Link href="/book">
-                  Book Consultation
-                  <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
-                </Link>
-              </Button>
-            </div>
-          </Card>
-        </div>
-      </section>
-
+      {/* Map Section */}
       <section className="bg-background px-4 py-16">
         <div className="container mx-auto max-w-6xl">
           <div className="overflow-hidden rounded-2xl animate-in fade-in slide-in-from-bottom-4 duration-1000">

@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { ArrowRight, Heart, Users, Sparkles, CheckCircle2 } from "lucide-react"
+import { ArrowRight, Heart, Users, Sparkles, CheckCircle2, Clock, TrendingUp, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 
@@ -55,6 +55,53 @@ export default function HomePage() {
                 </div>
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Statistics Section */}
+      <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">500+</p>
+                <p className="text-sm text-muted-foreground">Lives Transformed</p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Clock className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">15+</p>
+                <p className="text-sm text-muted-foreground">Years Practicing</p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <TrendingUp className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">95%</p>
+                <p className="text-sm text-muted-foreground">Success Rate</p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Star className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">4.9/5</p>
+                <p className="text-sm text-muted-foreground">Patient Satisfaction</p>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
