@@ -1,8 +1,9 @@
 "use client"
 
 import type React from "react"
+import type { Tables } from "@/lib/supabase/database.types"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
@@ -10,6 +11,7 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Card, CardContent } from "@/components/ui/card"
 import { createClient } from "@/lib/supabase/client"
+import ReactMarkdown from "react-markdown"
 import {
   Bold,
   Italic,
@@ -19,34 +21,55 @@ import {
   Heading3,
   List,
   ListOrdered,
-  LinkIcon,
+  Link as LinkIcon,
   ImageIcon,
   Save,
   Eye,
 } from "lucide-react"
 import { toast } from "sonner"
 
-export function BlogEditorForm() {
+type BlogPost = Tables<"blog_posts">
+interface BlogEditorFormProps {
+  post?: BlogPost
+}
+
+export function BlogEditorForm({ post }: BlogEditorFormProps) {
   const router = useRouter()
   const [isLoading, setIsLoading] = useState(false)
   const [isPreview, setIsPreview] = useState(false)
   const [formData, setFormData] = useState({
-    title: "",
-    slug: "",
-    excerpt: "",
-    content: "",
-    author: "",
-    category: "",
-    tags: "",
-    image: "",
+    title: post?.title || "",
+    slug: post?.slug || "",
+    excerpt: post?.excerpt || "",
+    content: post?.content || "",
+    author: post?.author || "",
+    category: post?.category || "",
+    tags: Array.isArray(post?.tags) ? post.tags.join(", ") : "",
+    image: post?.image || "",
   })
+
+  const isEditing = !!post
+
+  useEffect(() => {
+    if (post) {
+      setFormData({
+        title: post.title,
+        slug: post.slug,
+        excerpt: post.excerpt,
+        content: post.content,
+        author: post.author,
+        category: post.category,
+        tags: Array.isArray(post.tags) ? post.tags.join(", ") : "",
+        image: post.image || "",
+      })
+    }
+  }, [post])
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target
     setFormData((prev) => ({ ...prev, [name]: value }))
 
-    // Auto-generate slug from title
-    if (name === "title") {
+    if (name === "title" && !isEditing) {
       const slug = value
         .toLowerCase()
         .replace(/[^a-z0-9]+/g, "-")
@@ -109,17 +132,15 @@ export function BlogEditorForm() {
     }
 
     const newContent = formData.content.substring(0, start) + newText + formData.content.substring(end)
-
     setFormData((prev) => ({ ...prev, content: newContent }))
 
-    // Set cursor position after formatting
     setTimeout(() => {
       textarea.focus()
       textarea.setSelectionRange(start + cursorOffset, start + cursorOffset)
     }, 0)
   }
 
-  const handleSubmit = async (e: React.FormEvent, publish = false) => {
+  const handleSubmit = async (e: React.FormEvent, publish: boolean) => {
     e.preventDefault()
     setIsLoading(true)
 
@@ -130,7 +151,7 @@ export function BlogEditorForm() {
         .map((tag) => tag.trim())
         .filter(Boolean)
 
-      const { error } = await supabase.from("blog_posts").insert({
+      const postData = {
         title: formData.title,
         slug: formData.slug,
         excerpt: formData.excerpt,
@@ -140,12 +161,26 @@ export function BlogEditorForm() {
         tags: tagsArray,
         image: formData.image,
         published: publish,
-      })
+      }
+
+      let error
+      if (isEditing) {
+        const { error: updateError } = await supabase.from("blog_posts").update(postData).eq("id", post.id)
+        error = updateError
+      } else {
+        const { error: insertError } = await supabase.from("blog_posts").insert(postData)
+        error = insertError
+      }
 
       if (error) throw error
 
-      toast.success(publish ? "Blog post published successfully!" : "Draft saved successfully!")
+      toast.success(
+        isEditing
+          ? `Post ${publish ? "published" : "updated"} successfully!`
+          : `Draft saved successfully!`
+      )
       router.push("/admin/blog")
+      router.refresh()
     } catch (error) {
       console.error("Error saving blog post:", error)
       toast.error("Failed to save blog post. Please try again.")
@@ -158,7 +193,6 @@ export function BlogEditorForm() {
     <form onSubmit={(e) => handleSubmit(e, true)} className="space-y-6">
       <Card>
         <CardContent className="pt-6 space-y-4">
-          {/* Title */}
           <div className="space-y-2">
             <Label htmlFor="title">Title *</Label>
             <Input
@@ -171,7 +205,6 @@ export function BlogEditorForm() {
             />
           </div>
 
-          {/* Slug */}
           <div className="space-y-2">
             <Label htmlFor="slug">Slug *</Label>
             <Input
@@ -181,10 +214,10 @@ export function BlogEditorForm() {
               onChange={handleInputChange}
               placeholder="auto-generated-from-title"
               required
+              readOnly={isEditing}
             />
           </div>
 
-          {/* Excerpt */}
           <div className="space-y-2">
             <Label htmlFor="excerpt">Excerpt *</Label>
             <Textarea
@@ -198,7 +231,6 @@ export function BlogEditorForm() {
             />
           </div>
 
-          {/* Author */}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
               <Label htmlFor="author">Author *</Label>
@@ -212,7 +244,6 @@ export function BlogEditorForm() {
               />
             </div>
 
-            {/* Category */}
             <div className="space-y-2">
               <Label htmlFor="category">Category *</Label>
               <Input
@@ -226,7 +257,6 @@ export function BlogEditorForm() {
             </div>
           </div>
 
-          {/* Tags */}
           <div className="space-y-2">
             <Label htmlFor="tags">Tags (comma-separated)</Label>
             <Input
@@ -238,7 +268,6 @@ export function BlogEditorForm() {
             />
           </div>
 
-          {/* Image URL */}
           <div className="space-y-2">
             <Label htmlFor="image">Featured Image URL</Label>
             <Input
@@ -252,7 +281,6 @@ export function BlogEditorForm() {
         </CardContent>
       </Card>
 
-      {/* Content Editor */}
       <Card>
         <CardContent className="pt-6 space-y-4">
           <div className="flex items-center justify-between">
@@ -263,7 +291,6 @@ export function BlogEditorForm() {
             </Button>
           </div>
 
-          {/* Formatting Toolbar */}
           {!isPreview && (
             <div className="flex flex-wrap gap-1 p-2 border rounded-lg bg-muted/30">
               <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("h1")} title="Heading 1">
@@ -292,13 +319,7 @@ export function BlogEditorForm() {
                 <Underline className="h-4 w-4" />
               </Button>
               <div className="w-px h-6 bg-border mx-1" />
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => insertFormatting("ul")}
-                title="Bullet List"
-              >
+              <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("ul")} title="Bullet List">
                 <List className="h-4 w-4" />
               </Button>
               <Button
@@ -311,13 +332,7 @@ export function BlogEditorForm() {
                 <ListOrdered className="h-4 w-4" />
               </Button>
               <div className="w-px h-6 bg-border mx-1" />
-              <Button
-                type="button"
-                variant="ghost"
-                size="sm"
-                onClick={() => insertFormatting("link")}
-                title="Insert Link"
-              >
+              <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("link")} title="Insert Link">
                 <LinkIcon className="h-4 w-4" />
               </Button>
               <Button
@@ -332,10 +347,9 @@ export function BlogEditorForm() {
             </div>
           )}
 
-          {/* Content Textarea or Preview */}
           {isPreview ? (
             <div className="prose prose-sm max-w-none p-4 border rounded-lg min-h-[400px] bg-background">
-              <div dangerouslySetInnerHTML={{ __html: formData.content }} />
+              <ReactMarkdown>{formData.content}</ReactMarkdown>
             </div>
           ) : (
             <Textarea
@@ -352,14 +366,19 @@ export function BlogEditorForm() {
         </CardContent>
       </Card>
 
-      {/* Action Buttons */}
       <div className="flex gap-4 justify-end">
         <Button type="button" variant="outline" onClick={(e) => handleSubmit(e, false)} disabled={isLoading}>
           <Save className="h-4 w-4 mr-2" />
-          Save Draft
+          {isEditing ? "Save Changes" : "Save Draft"}
         </Button>
         <Button type="submit" disabled={isLoading}>
-          {isLoading ? "Publishing..." : "Publish Post"}
+          {isLoading
+            ? isEditing
+              ? "Updating..."
+              : "Publishing..."
+            : isEditing
+            ? "Update Post"
+            : "Publish Post"}
         </Button>
       </div>
     </form>

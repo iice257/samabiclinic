@@ -254,7 +254,7 @@ export const treatments: Treatment[] = [
     title: "Stress & Sleep Optimization",
     subtitle: "Master stress resilience and restorative sleep",
     summary:
-      "Holistic program to break the cycle of chronic stress and poor sleep, restoring your body's natural rhythms and building lasting resilience.",
+      "A holistic program to break the cycle of chronic stress and poor sleep, in order to restore your body's natural rhythms, sleep schedules and building lasting resilience.",
     description:
       "Our Stress & Sleep Optimization program addresses the interconnected challenges of chronic stress and sleep disturbances that affect millions. We recognize that poor sleep increases stress, and chronic stress disrupts sleep, creating a vicious cycle. Through comprehensive assessment of your stress response, sleep architecture, and circadian rhythms, we develop personalized protocols to restore balance. This program combines advanced testing, targeted supplementation, lifestyle modifications, and stress management techniques to help you achieve restorative sleep and build lasting stress resilience.",
     image: "/stress-management-sleep-optimization-wellness.jpg",
