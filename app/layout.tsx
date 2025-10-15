@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Samabi Functional Medicine Clinic" }],
   openGraph: {
-    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Lagos",
+    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Port Harcourt",
     description: "Transform your health with personalized functional medicine.",
     type: "website",
     locale: "en_US",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Lagos",
+    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Port Harcourt",
     description: "Transform your health with personalized functional medicine.",
   },
     generator: 'v0.app'

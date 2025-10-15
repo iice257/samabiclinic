@@ -1,3 +1,5 @@
+"use client"
+
 import type { Metadata } from "next"
 import Link from "next/link"
 import Image from "next/image"
@@ -5,27 +7,28 @@ import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock } from "lucide-react"
 import { getAllBlogPosts } from "@/lib/data/blog-posts"
-
-export const metadata: Metadata = {
-  title: "Health Insights & Articles | Samabi Functional Medicine",
-  description:
-    "Expert insights on functional medicine, gut health, hormones, nutrition, and holistic wellness from our team of specialists.",
-  openGraph: {
-    title: "Health Insights & Articles | Samabi Functional Medicine",
-    description:
-      "Expert insights on functional medicine, gut health, hormones, nutrition, and holistic wellness from our team of specialists.",
-    type: "website",
-  },
-}
+import LightRays from "@/components/ui/lightrays"
+import { useTheme } from "next-themes"
 
 export default function InsightsPage() {
   const posts = getAllBlogPosts()
+  const { theme } = useTheme()
 
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animated-gradient">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 px-4 py-24 md:py-32">
-        <div className="container mx-auto max-w-4xl text-center">
+      <section className="relative overflow-hidden px-4 py-24 md:py-32">
+        <div className="absolute inset-0 z-0">
+          <LightRays
+            raysColor={theme === "light" ? "#B2D8B2" : "#ffffff"}
+            raysSpeed={0.2}
+            lightSpread={0.5}
+            rayLength={1.5}
+            pulsating={true}
+            mouseInfluence={0.1}
+          />
+        </div>
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="mb-6 text-balance font-bold text-4xl text-foreground md:text-5xl lg:text-6xl">
               Insights for a Healthier You
@@ -48,7 +51,7 @@ export default function InsightsPage() {
                 className="group animate-in fade-in slide-in-from-bottom-4 duration-1000"
                 style={{ animationDelay: `${index * 100}ms` }}
               >
-                <Card className="h-full overflow-hidden border-border/50 bg-card transition-all  hover:shadow-xl hover:-translate-y-2">
+                <Card className="h-full overflow-hidden border-border/50 bg-card transition-all duration-300 hover:shadow-xl hover:-translate-y-2">
                   <div className="relative aspect-[16/10] overflow-hidden">
                     <Image
                       src={post.image || "/placeholder.svg"}

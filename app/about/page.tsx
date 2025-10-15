@@ -1,28 +1,32 @@
+"use client"
+
 import type { Metadata } from "next"
 import Image from "next/image"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { ArrowRight, Heart, Microscope, Sparkles } from "lucide-react"
-
-export const metadata: Metadata = {
-  title: "About Us | Samabi Functional Medicine Clinic",
-  description:
-    "Root-cause medicine for the modern world. Learn about our team, philosophy, and approach to integrative functional medicine.",
-  openGraph: {
-    title: "About Us | Samabi Functional Medicine Clinic",
-    description:
-      "Root-cause medicine for the modern world. Learn about our team, philosophy, and approach to integrative functional medicine.",
-    type: "website",
-  },
-}
+import LightRays from "@/components/ui/lightrays"
+import { useTheme } from "next-themes"
 
 export default function AboutPage() {
+  const { theme } = useTheme()
+
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animated-gradient">
       {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 px-4 py-24 md:py-32">
-        <div className="container mx-auto max-w-4xl text-center">
+      <section className="relative overflow-hidden px-4 py-24 md:py-32">
+        <div className="absolute inset-0 z-0">
+          <LightRays
+            raysColor={theme === "light" ? "#B2D8B2" : "#ffffff"}
+            raysSpeed={0.2}
+            lightSpread={0.5}
+            rayLength={1.5}
+            pulsating={true}
+            mouseInfluence={0.1}
+          />
+        </div>
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="mb-6 text-balance font-bold text-4xl text-foreground md:text-5xl lg:text-6xl">
               Root-cause medicine for the modern world
@@ -153,7 +157,7 @@ export default function AboutPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="bg-gradient-to-br from-primary/10 via-background to-accent/10 px-4 py-16 md:py-24">
+      <section className="bg-muted/30 px-4 py-16 md:py-24">
         <div className="container mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <h2 className="mb-6 text-balance font-bold text-3xl text-foreground md:text-4xl">
             Ready to experience personalized care?
@@ -162,15 +166,15 @@ export default function AboutPage() {
             Join hundreds of patients who have transformed their health with our root-cause approach.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-            <Button size="lg" className="group w-full sm:w-auto" asChild>
+            <Button size="lg" className="group w-full sm:w-auto transition-transform hover:scale-105" asChild>
               <Link href="/contact">
                 Book Consultation
                 <span className="transition-transform duration-300 group-hover:translate-x-1">
-                  <ArrowRight className="h-2 w-2" />
+                  <ArrowRight className="h-5 w-5" />
                 </span>
               </Link>
             </Button>
-            <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent" asChild>
+            <Button size="lg" variant="outline" className="w-full sm:w-auto bg-transparent transition-transform hover:scale-105" asChild>
               <Link href="/services">Explore Services</Link>
             </Button>
           </div>

@@ -5,13 +5,27 @@ import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { treatments } from "@/lib/data/treatments"
+import LightRays from "@/components/ui/lightrays"
+import { useTheme } from "next-themes"
 
 export default function TreatmentsClientPage() {
+  const { theme } = useTheme()
+
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animated-gradient">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <LightRays
+            raysColor={theme === "light" ? "#B2D8B2" : "#ffffff"}
+            raysSpeed={0.2}
+            lightSpread={0.5}
+            rayLength={1.5}
+            pulsating={true}
+            mouseInfluence={0.1}
+          />
+        </div>
+        <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance">Specialized treatment programs</h1>
             <p className="text-lg md:text-xl text-muted-foreground text-pretty">
@@ -35,7 +49,7 @@ export default function TreatmentsClientPage() {
                   animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
                 }}
               >
-                <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all  hover:-translate-y-2">
+                <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300 hover:-translate-y-2">
                   <div className="relative h-64 overflow-hidden">
                     <Image
                       src={treatment.image || "/placeholder.svg"}
@@ -88,7 +102,7 @@ export default function TreatmentsClientPage() {
               ].map((item, index) => (
                 <div
                   key={item.title}
-                  className="bg-card rounded-xl p-6 shadow-md"
+                  className="bg-card rounded-xl p-6 shadow-md transition-transform hover:scale-105"
                   style={{
                     animation: `fadeInUp 0.6s ease-out ${0.6 + index * 0.1}s both`,
                   }}
@@ -112,7 +126,7 @@ export default function TreatmentsClientPage() {
             <p className="text-lg md:text-xl text-muted-foreground text-pretty">
               Book a consultation and we'll help you find the best path forward for your health goals.
             </p>
-            <Button size="lg" asChild className="text-base">
+            <Button size="lg" asChild className="text-base transition-transform hover:scale-105">
               <Link href="/contact">
                 Book Your Consultation
                 <ArrowRight className="ml-2 h-5 w-5" />

@@ -3,6 +3,8 @@
 import Link from "next/link"
 import { Microscope, Leaf, Apple, Heart, ArrowRight } from "lucide-react"
 import { Button } from "@/components/ui/button"
+import LightRays from "@/components/ui/lightrays"
+import { useTheme } from "next-themes"
 
 const services = [
   {
@@ -56,11 +58,23 @@ const services = [
 ]
 
 export default function ServicesClient() {
+  const { theme } = useTheme()
+
   return (
-    <main className="min-h-screen">
+    <main className="min-h-screen animated-gradient">
       {/* Hero Section */}
-      <section className="relative py-20 md:py-32">
-        <div className="container mx-auto px-4 md:px-8 max-w-7xl">
+      <section className="relative py-20 md:py-32 overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <LightRays
+            raysColor={theme === "light" ? "#B2D8B2" : "#ffffff"}
+            raysSpeed={0.2}
+            lightSpread={0.5}
+            rayLength={1.5}
+            pulsating={true}
+            mouseInfluence={0.1}
+          />
+        </div>
+        <div className="container mx-auto px-4 md:px-8 max-w-7xl relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance">
               Our approach blends science, precision, and compassion
@@ -82,7 +96,7 @@ export default function ServicesClient() {
               return (
                 <div
                   key={service.title}
-                  className="group bg-card rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all  hover:-translate-y-1"
+                  className="group bg-card rounded-2xl p-8 md:p-10 shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1"
                   style={{
                     animation: `fadeInUp 0.6s ease-out ${index * 0.1}s both`,
                   }}
@@ -170,13 +184,13 @@ export default function ServicesClient() {
               Discover our specialized treatment programs designed to address your specific health concerns.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" asChild className="text-base">
+              <Button size="lg" asChild className="text-base transition-transform hover:scale-105">
                 <Link href="/treatments">
                   View Treatments
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" asChild className="text-base bg-transparent">
+              <Button size="lg" variant="outline" asChild className="text-base bg-transparent transition-transform hover:scale-105">
                 <Link href="/contact">Book Consultation</Link>
               </Button>
             </div>

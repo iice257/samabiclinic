@@ -74,7 +74,7 @@ export function BookingForm({ onAppointmentBooked }: BookingFormProps) {
 
     if (error) {
       toast.error("Failed to book appointment. Please try again.")
-      console.error("Error booking appointment:", error)
+      console.error("Detailed error booking appointment:", JSON.stringify(error, null, 2))
     } else {
       toast.success("Appointment request submitted successfully!")
       setFormData({ name: "", email: "", phone: "", service: "", message: "" })

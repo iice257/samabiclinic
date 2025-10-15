@@ -1,15 +1,30 @@
+"use client"
+
 import Link from "next/link"
 import { ArrowRight, Heart, Users, Sparkles, CheckCircle2, Clock, TrendingUp, Star } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
+import LightRays from "@/components/ui/lightrays"
+import { useTheme } from "next-themes"
 
 export default function HomePage() {
+  const { theme } = useTheme()
+
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen animated-gradient">
       {/* Hero Section */}
       <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent" />
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
+        <div className="absolute inset-0 z-0">
+          <LightRays
+            raysColor={theme === "light" ? "#B2D8B2" : "#ffffff"}
+            raysSpeed={0.2}
+            lightSpread={0.5}
+            rayLength={1.5}
+            pulsating={true}
+            mouseInfluence={0.1}
+          />
+        </div>
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
@@ -24,13 +39,13 @@ export default function HomePage() {
                 addresses root causes, not just symptoms.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="rounded-full" asChild>
+                <Button size="lg" className="rounded-full transition-transform hover:scale-105" asChild>
                   <Link href="/contact">
                     Book Your Consultation
                     <ArrowRight className="ml-2 h-5 w-5" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" className="rounded-full bg-transparent" asChild>
+                <Button size="lg" variant="outline" className="rounded-full bg-transparent transition-transform hover:scale-105" asChild>
                   <Link href="/about">Learn More</Link>
                 </Button>
               </div>
@@ -60,7 +75,7 @@ export default function HomePage() {
       </section>
 
       {/* Statistics Section */}
-      <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent">
+      <section className="py-16 lg:py-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
             <Card className="border-border hover:shadow-lg transition-all duration-300">
@@ -140,7 +155,7 @@ export default function HomePage() {
                   </li>
                 ))}
               </ul>
-              <Button size="lg" variant="outline" className="rounded-full bg-transparent" asChild>
+              <Button size="lg" variant="outline" className="rounded-full bg-transparent transition-transform hover:scale-105" asChild>
                 <Link href="/about">
                   Discover Our Approach
                   <ArrowRight className="ml-2 h-5 w-5" />
@@ -184,7 +199,7 @@ export default function HomePage() {
                 icon: Heart,
               },
             ].map((service) => (
-              <Card key={service.title} className="border-border hover:shadow-lg transition-shadow">
+              <Card key={service.title} className="border-border hover:shadow-lg transition-shadow duration-300">
                 <CardContent className="p-8 space-y-4">
                   <div className="w-14 h-14 bg-primary/10 rounded-xl flex items-center justify-center">
                     <service.icon className="h-7 w-7 text-primary" />
@@ -204,7 +219,7 @@ export default function HomePage() {
           </div>
 
           <div className="text-center mt-12">
-            <Button size="lg" className="rounded-full" asChild>
+            <Button size="lg" className="rounded-full transition-transform hover:scale-105" asChild>
               <Link href="/services">
                 View All Services
                 <ArrowRight className="ml-2 h-5 w-5" />
@@ -250,25 +265,13 @@ export default function HomePage() {
                 role: "Port Harcourt",
               },
             ].map((testimonial) => (
-              <Card key={testimonial.number} className="border-border relative">
+              <Card key={testimonial.number} className="border-border relative transition-all duration-300 hover:shadow-lg hover:-translate-y-1">
                 <CardContent className="p-8 space-y-4">
                   <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-primary font-bold text-lg">{testimonial.number}</span>
                   </div>
                   <p className="text-foreground leading-relaxed italic">
-                    {testimonial.quote.includes("years") ? (
-                      <>
-                        After <span className="font-bold">years</span> of digestive issues, Dr. Abimbola Kazeem's
-                        approach finally gave me answers. I feel like myself again.
-                      </>
-                    ) : testimonial.quote.includes("decade") ? (
-                      <>
-                        The personalized care I received was life-changing. My energy levels are better than they've
-                        been in <span className="font-bold">a decade</span>.
-                      </>
-                    ) : (
-                      testimonial.quote
-                    )}
+                    {testimonial.quote}
                   </p>
                   <div className="pt-4 border-t border-border">
                     <p className="font-semibold text-foreground">{testimonial.author}</p>
@@ -292,13 +295,13 @@ export default function HomePage() {
               Book your initial consultation today and take the first step toward optimal health.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Button size="lg" className="rounded-full" asChild>
+              <Button size="lg" className="rounded-full transition-transform hover:scale-105" asChild>
                 <Link href="/contact">
                   Schedule Consultation
                   <ArrowRight className="ml-2 h-5 w-5" />
                 </Link>
               </Button>
-              <Button size="lg" variant="outline" className="rounded-full bg-transparent" asChild>
+              <Button size="lg" variant="outline" className="rounded-full bg-transparent transition-transform hover:scale-105" asChild>
                 <Link href="/treatments">Explore Treatments</Link>
               </Button>
             </div>
@@ -308,3 +311,4 @@ export default function HomePage() {
     </div>
   )
 }
+

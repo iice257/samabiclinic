@@ -182,7 +182,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
       router.push("/admin/blog")
       router.refresh()
     } catch (error) {
-      console.error("Error saving blog post:", error)
+      console.error("Detailed error saving blog post:", JSON.stringify(error, null, 2))
       toast.error("Failed to save blog post. Please try again.")
     } finally {
       setIsLoading(false)

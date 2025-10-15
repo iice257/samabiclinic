@@ -65,7 +65,7 @@ export function CommentSection({ postId, onCommentSubmitted }: CommentSectionPro
 
     if (error) {
       toast.error("Failed to submit comment. Please try again.")
-      console.error("Error submitting comment:", error)
+      console.error("Detailed error submitting comment:", JSON.stringify(error, null, 2))
     } else {
       toast.success("Comment submitted successfully!")
       setComments([data, ...comments])

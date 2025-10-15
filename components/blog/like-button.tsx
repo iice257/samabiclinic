@@ -33,7 +33,7 @@ export function LikeButton({ postId, initialLikes }: LikeButtonProps) {
 
     if (error) {
       toast.error("Failed to like post. Please try again.")
-      console.error("Error liking post:", error)
+      console.error("Detailed error liking post:", JSON.stringify(error, null, 2))
     } else {
       setLikes(likes + 1)
       setIsLiked(true)

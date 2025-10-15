@@ -28,7 +28,7 @@ export function NewsletterForm() {
         toast.info("You are already subscribed to our newsletter.")
       } else {
         toast.error("Failed to subscribe. Please try again.")
-        console.error("Error subscribing to newsletter:", error)
+        console.error("Detailed error subscribing to newsletter:", JSON.stringify(error, null, 2))
       }
     } else {
       toast.success("You have been subscribed to our newsletter!")

@@ -7,18 +7,31 @@ import { Card } from "@/components/ui/card"
 import Link from "next/link"
 import { ContactForm } from "@/components/contact/ContactForm"
 import { NewsletterPopup } from "@/components/layout/newsletter-popup"
+import LightRays from "@/components/ui/lightrays"
+import { useTheme } from "next-themes"
 
 export default function ContactPage() {
   const [showNewsletterPopup, setShowNewsletterPopup] = useState(false)
+  const { theme } = useTheme()
 
   const handleFormSubmitted = () => {
     setShowNewsletterPopup(true)
   }
 
   return (
-    <main className="min-h-screen">
-      <section className="relative overflow-hidden bg-gradient-to-br from-primary/5 via-background to-accent/5 px-4 py-24 md:py-32">
-        <div className="container mx-auto max-w-4xl text-center">
+    <main className="min-h-screen animated-gradient">
+      <section className="relative overflow-hidden px-4 py-24 md:py-32">
+        <div className="absolute inset-0 z-0">
+          <LightRays
+            raysColor={theme === "light" ? "#B2D8B2" : "#ffffff"}
+            raysSpeed={0.2}
+            lightSpread={0.5}
+            rayLength={1.5}
+            pulsating={true}
+            mouseInfluence={0.1}
+          />
+        </div>
+        <div className="container mx-auto max-w-4xl text-center relative z-10">
           <div className="animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h1 className="mb-6 text-balance font-bold text-4xl text-foreground md:text-5xl lg:text-6xl">
               Let's Start Your Journey to Better Health
@@ -51,14 +64,13 @@ export default function ContactPage() {
                 <h3 className="mb-6 font-bold text-2xl text-foreground">Send Us a Message</h3>
                 <ContactForm onFormSubmitted={handleFormSubmitted} />
               </Card>
-              <Card className="border-border/50 bg-card p-8 animate-in fade-in slide-in-from-right-8 duration-1000 delay-200">
-                <div className="p-3.5 text-center space-y-6">
+              <Card className="border-border/50 bg-card p-8 animate-in fade-in slide-in-from-right-8 duration-1000 delay-200 transition-transform hover:scale-105">
+                <div className="text-center space-y-6">
                   <h3 className="font-bold text-2xl text-foreground md:text-3xl">Book an Appointment</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Prefer to speak directly with a specialist?
-                    Skip the wait. Schedule a personalised consultation with our functional medicine team. Wether you're seeking guidance, a treatment plan, or a second opinion, we'll help you take the next step toward lasting wellness.
+                    Ready to take the next step? Schedule a personalized consultation with our team.
                   </p>
-                  <Button size="lg" className="group rounded-full" asChild>
+                  <Button size="lg" className="group rounded-full transition-transform hover:scale-105" asChild>
                     <Link href="/book">
                       Book Consultation
                       <span className="ml-2 transition-transform duration-300 group-hover:translate-x-1">→</span>
@@ -77,7 +89,7 @@ export default function ContactPage() {
 }
 
 const InfoCard = ({ icon: Icon, title, text, href }: { icon: React.ElementType, title: string, text: string, href?: string }) => (
-  <Card className="border-border/50 bg-card p-6 transition-all hover:shadow-lg animate-in fade-in slide-in-from-left-8 duration-1000">
+  <Card className="border-border/50 bg-card p-6 transition-all duration-300 hover:shadow-lg hover:-translate-y-1 animate-in fade-in slide-in-from-left-8">
     <div className="inline-flex rounded-full p-3">
       <Icon className="h-6 w-6 text-primary" />
     </div>
