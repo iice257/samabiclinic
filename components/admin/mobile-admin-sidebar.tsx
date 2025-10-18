@@ -4,8 +4,9 @@ import { useState } from "react"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { BookOpen, Plus, LogOut, Home, Mail, Calendar, Newspaper, X, Menu } from "lucide-react"
+import { BookOpen, Plus, LogOut, Home, Mail, Calendar, Newspaper, X, Menu, Moon, Sun } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { usePathname } from "next/navigation"
 
 const adminLinks = [
   {
@@ -32,12 +33,24 @@ const adminLinks = [
 
 export function MobileAdminSidebar() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isDark, setIsDark] = useState(false)
+  const pathname = usePathname()
+
+  const toggleTheme = () => {
+    setIsDark(!isDark)
+    document.documentElement.classList.toggle("dark")
+  }
 
   return (
     <>
-      <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} className="md:hidden">
-        {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
-      </Button>
+      <div className="flex items-center gap-2">
+        <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
+          {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        </Button>
+        <Button variant="ghost" size="icon" onClick={() => setIsOpen(!isOpen)} className="md:hidden">
+          {isOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
+        </Button>
+      </div>
 
       {isOpen && (
         <div className="fixed inset-0 top-0 md:hidden bg-background/95 backdrop-blur-lg z-50 flex flex-col">
@@ -58,22 +71,27 @@ export function MobileAdminSidebar() {
           </div>
 
           <nav className="flex-1 p-4 space-y-2">
-            {adminLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className={cn(
-                  "flex items-center gap-3 rounded-lg px-3 py-2 text-muted-foreground transition-all hover:text-primary",
-                  "font-medium"
-                )}
-                onClick={() => setIsOpen(false)}
-              >
-                <link.icon className="h-4 w-4" />
-                {link.title}
-              </Link>
-            ))}
+            {adminLinks.map((link) => {
+              const isActive = pathname === link.href || (link.href !== "/admin" && pathname.startsWith(link.href))
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "flex items-center gap-3 rounded-lg px-3 py-2 transition-all font-medium",
+                    isActive
+                      ? "bg-primary text-primary-foreground hover:text-primary-foreground"
+                      : "text-muted-foreground hover:text-primary"
+                  )}
+                  onClick={() => setIsOpen(false)}
+                >
+                  <link.icon className="h-4 w-4" />
+                  {link.title}
+                </Link>
+              )
+            })}
             <hr className="my-2 border-border" />
-            <Button asChild className="w-full justify-start">
+            <Button asChild variant="outline" className="w-full justify-start">
               <Link href="/admin/blog/new" onClick={() => setIsOpen(false)}>
                 <Plus className="h-4 w-4 mr-2" />
                 New Post
