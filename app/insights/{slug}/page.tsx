@@ -3,11 +3,11 @@ import { notFound } from "next/navigation"
 import { createClient } from "@/lib/supabase/server"
 import { BlogPostClient } from "./BlogPostClient"
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 3600
 
 export async function generateStaticParams() {
   const supabase = createClient()
-  const { data: posts } = await supabase.from("blog_posts").select("slug").eq("published", true)
+  const { data: posts } = await supabase.from("blog_posts").select("slug").eq("status", "post")
   return posts?.map((post) => ({ slug: post.slug })) || []
 }
 
@@ -17,7 +17,7 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     .from("blog_posts")
     .select("title, excerpt, author, created_at")
     .eq("slug", params.slug)
-    .eq("published", true)
+    .eq("status", "post")
     .single()
 
   if (!post) {
@@ -45,7 +45,7 @@ export default async function BlogPostPage({ params }: { params: { slug: string 
     .from("blog_posts")
     .select("*")
     .eq("slug", params.slug)
-    .eq("published", true)
+    .eq("status", "post")
     .single()
 
   if (error || !post) {

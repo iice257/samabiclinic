@@ -1,13 +1,13 @@
 "use client"
 
 import type React from "react"
-
 import { useState } from "react"
 import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { toast } from "sonner"
+import { validateAdminCredentials, setAdminSession } from "@/lib/admin-auth"
 
 export default function AdminLoginPage() {
   const router = useRouter()
@@ -20,9 +20,9 @@ export default function AdminLoginPage() {
     setIsLoading(true)
 
     try {
-      if (username === "samabi" && password === "adminarea") {
-        // Store auth token in localStorage
-        localStorage.setItem("adminAuth", JSON.stringify({ username, timestamp: Date.now() }))
+      if (validateAdminCredentials(username, password)) {
+        const token = btoa(`${username}:${Date.now()}`)
+        setAdminSession(token)
         toast.success("Login successful")
         router.push("/admin")
       } else {

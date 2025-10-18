@@ -3,8 +3,6 @@ import type { Metadata } from "next"
 import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
-import { Navbar } from "@/components/layout/navbar"
-import { Footer } from "@/components/layout/footer"
 import { Suspense } from "react"
 
 const inter = Inter({
@@ -47,13 +45,13 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const isAdminRoute = false // This will be checked in the component
+
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
         <Suspense fallback={<div>Loading...</div>}>
-          <Navbar />
-          <main>{children}</main>
-          <Footer />
+          {children}
           <Analytics />
         </Suspense>
       </body>
