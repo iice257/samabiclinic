@@ -33,7 +33,7 @@ export default function BookingPage() {
       <section className="px-4 py-16 md:py-24">
         <div className="container mx-auto max-w-5xl">
           <div className="grid gap-8 lg:grid-cols-3">
-            <div className="space-y-8 lg:col-span-1">
+            <div className="space-y-6 lg:col-span-1">
               <InfoCard
                 icon={CalendarIcon}
                 title="Flexible Scheduling"
@@ -52,6 +52,14 @@ export default function BookingPage() {
                 description="Meet with our experienced functional medicine specialists who will create a personalized care plan."
                 delay={200}
               />
+              <Card className="border-border/50 bg-card p-4 animate-in fade-in slide-in-from-left-8 duration-1000 delay-200">
+              <p className="text-muted-foreground text-xs">
+                For enquiries, 
+                <a href="/contact" className="transition-colors underline hover:text-primary">
+                  contact us.
+                </a>
+              </p>
+            </Card>
             </div>
 
             <Card className="border-border/50 bg-card p-8 lg:col-span-2 animate-in fade-in slide-in-from-right-8 duration-1000">

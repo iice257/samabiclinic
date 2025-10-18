@@ -39,7 +39,7 @@ export default function AdminLoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle>Admin Login</CardTitle>
+          <CardTitle>Admin Login Page</CardTitle>
           <CardDescription>Enter your credentials to access the admin panel</CardDescription>
         </CardHeader>
         <CardContent>
@@ -70,9 +70,16 @@ export default function AdminLoginPage() {
                 required
               />
             </div>
-            <Button type="submit" className="w-full" disabled={isLoading}>
+            <Button type="submit" className="w-full bg-green-400" disabled={isLoading}>
               {isLoading ? "Logging in..." : "Login"}
             </Button>
+            <p className="text-muted-foreground">
+              Are you trying to access the admin panel? If not
+              <br />
+              <a href="/home" className="text-red-400 font-semibold transition-colors underline hover:text-primary">
+                go back to home.
+              </a>
+            </p>
           </form>
         </CardContent>
       </Card>
