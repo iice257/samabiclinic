@@ -36,7 +36,7 @@ export default function TreatmentsClientPage() {
                 }}
               >
                 <div className="bg-card rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all  hover:-translate-y-2">
-                  <div className="relative h-64 overflow-hidden">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <Image
                       src={treatment.image || "/placeholder.svg"}
                       alt={treatment.title}

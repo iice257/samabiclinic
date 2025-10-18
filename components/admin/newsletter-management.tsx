@@ -6,6 +6,8 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/com
 import { Button } from "@/components/ui/button"
 import { Plus, Mail } from "lucide-react"
 import { toast } from "sonner"
+import { Skeleton } from "@/components/ui/skeleton"
+import link from "next/link"
 
 interface Newsletter {
   id: string
@@ -40,16 +42,33 @@ export function NewsletterManagement() {
     }
   }
 
-  if (isLoading) {
-    return <div className="text-center py-10">Loading...</div>
+ if (isLoading) {
+    return (
+      <div className="space-y-2">
+        {[...Array(3)].map((_, i) => (
+          <Card key={i}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3 flex-1">
+                  <Skeleton className="h-4 w-4" />
+                  <div className="flex-1">
+                    <Skeleton className="h-4 w-3/4" />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Skeleton className="h-8 w-8" />
+                  <Skeleton className="h-8 w-8" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    )
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-        <div className="mb-8">
-          <h1 className="text-4xl font-bold mb-2 text-primary">Bookings & Appointments</h1>
-          <p className="text-muted-foreground text-lg">Here's where you view and manage your bookings.</p>
-        </div>
+    <div className="container mx-auto px-4 py-4 md:px-8 md:py-8">
       <div className="space-y-6">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Card>
@@ -66,10 +85,12 @@ export function NewsletterManagement() {
               <CardTitle className="text-muted-foreground text-lg">Create Newsletter</CardTitle>
             </CardHeader>
             <CardContent>
-              <Button className="w-full">
-                <Plus className="h-4 w-4 mr-2" />
-                New Newsletter
-              </Button>
+              <a href="/admin/newsletters/new">
+                <Button className="w-full">
+                  <Plus className="h-4 w-4 mr-2" />
+                  New Newsletter
+                </Button>
+              </a>
             </CardContent>
           </Card>
         </div>

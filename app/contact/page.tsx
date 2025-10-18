@@ -89,7 +89,7 @@ export default function ContactPage() {
             <h2 className="mb-2 font-bold text-3xl text-foreground">Visit Our Clinic</h2>
             <p className="text-muted-foreground">No 5 Isaac Ken Close, Off farm Road, Rumuosi Portharcourt, Nigeria</p>
           </div>
-          <div className="rounded-2xl overflow-hidden shadow-lg h-96 animate-in fade-in duration-1000">
+          <div className="rounded-2xl overflow-hidden shadow-lg aspect-[4/3] md:aspect-[16/9] animate-in fade-in duration-1000">
             <iframe
               src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3968.8234567890123!2d7.0123456!3d4.7654321!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x107f5c1234567890%3A0x1234567890abcdef!2sNo%205%20Isaac%20Ken%20Close%2C%20Rumuosi%2C%20Port%20Harcourt!5e0!3m2!1sen!2sng!4v1234567890"
               width="100%"

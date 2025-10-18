@@ -4,8 +4,9 @@ import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { BookOpen, Plus, LogOut, Home, Mail, Calendar, Newspaper } from "lucide-react"
+import { Plus, LogOut, Moon, Sun, Home, Mail, Calendar, Newspaper } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useState } from "react"
 
 const adminLinks = [
   {
@@ -33,26 +34,32 @@ const adminLinks = [
 export function AdminSidebar() {
   const router = useRouter()
   const pathname = usePathname()
+  const [isDark, setIsDark] = useState(false)
 
   const handleLogout = () => {
     localStorage.removeItem("adminAuth")
     router.push("/admin/login")
   }
+  
+  
+  const toggleTheme = () => {
+    setIsDark(!isDark)
+    document.documentElement.classList.toggle("dark")
+  }
+
 
   return (
-    <aside className="sticky top-0 left-0 w-64 bg-muted/30 border-r border-border min-h-screen max-h-screen flex flex-col">
-      <div className="p-6 border-b border-border">
+    <aside className="sticky top-0 left-0 w-64 bg-muted/30 border-r border-border min-h-screen flex flex-col">
+      <div className="flex items-center justify-between p-2 border-b border-border">
         <Link href="/admin" className="flex items-center gap-2">
-          <Image
-            src="/favicon.png"
-            alt="Samabi Logo"
-            width={40}
-            height={40}
-            className="rounded-sm object-cover transition-transform duration-700 group-hover:scale-105"
-          />  
+          <Image src="/favicon.png" alt="Samabi Logo" width={20} height={20} className="rounded-sm" />
           <h2 className="text-muted-primary text-xl font-bold">Samabi Admin</h2>
         </Link>
+        <Button variant="ghost" size="icon" onClick={toggleTheme} className="rounded-full">
+          {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
+        </Button>
       </div>
+
 
       <nav className="flex-1 p-4 space-y-2">
         {adminLinks.map((link) => {
@@ -71,7 +78,7 @@ export function AdminSidebar() {
           )
         })}
         <hr className="my-2 border-border" />
-        <Button variant={"secondary"} asChild className="w-full justify-start">
+        <Button variant={"outline"} asChild className="w-full justify-start">
           <Link href="/admin/blog/new">
             <Plus className="h-4 w-4 mr-2" />
             New Post

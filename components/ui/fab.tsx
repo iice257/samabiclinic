@@ -29,8 +29,8 @@ export function fab() {
             <DropdownMenuItem>
                 <Link href="/admin/blog/new">Blog Post</Link>
             </DropdownMenuItem>
-            <DropdownMenuItem disabled>
-              <Link href="/admin/blog/new">Newsletter</Link>
+            <DropdownMenuItem>
+              <Link href="/admin/newsletters/new">Newsletter</Link>
             </DropdownMenuItem>
           </DropdownMenuGroup>
         </DropdownMenuContent>

@@ -3,9 +3,9 @@
 import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
-import { Menu, X, Moon, Sun } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import Image from "next/image"
+import { Menu, X, Moon, Sun, Home, Briefcase, Stethoscope, BookOpen, Info, Mail } from "lucide-react"
 
 export function Navbar() {
   const [isOpen, setIsOpen] = useState(false)
@@ -27,12 +27,12 @@ export function Navbar() {
   }
 
   const navLinks = [
-    { href: "/", label: "Home" },
-    { href: "/services", label: "Services" },
-    { href: "/treatments", label: "Treatments and Bookings" },
-    { href: "/insights", label: "Blog " },
-    { href: "/about", label: "About" },
-    { href: "/contact", label: "Contact" },
+    { href: "/", label: "Home", icon: Home },
+    { href: "/services", label: "Services", icon: Briefcase },
+    { href: "/treatments", label: "Treatments and Bookings", icon: Stethoscope },
+    { href: "/insights", label: "Blog ", icon: BookOpen },
+    { href: "/about", label: "About", icon: Info },
+    { href: "/contact", label: "Contact", icon: Mail },
   ]
 
   const isActive = (href: string) => {
@@ -44,7 +44,7 @@ export function Navbar() {
 
   return (
     <nav
-      className={`sticky top-0 left-0 right-0 z-50 transition-all duration-300 ${
+      className={`sticky top-0 left-0 right-0 z-40 transition-all duration-300 ${
         isScrolled ? "bg-background/90 backdrop-blur-lg shadow-sm" : "backdrop-blur-lg"
       }`}
     >
@@ -101,23 +101,23 @@ export function Navbar() {
         </div>
 
         {isOpen && (
-          <div className="fixed inset-0 top-20 md:hidden bg-background/95 backdrop-blur-lg z-40 flex flex-col">
-            <div className="flex-1 flex flex-col justify-start pt-8 px-4 space-y-4 overflow-y-auto">
+          <div className="fixed h-screen w-screen md:hidden bg-background backdrop-blur-lg z-50 flex flex-col">
+            <div className="flex flex-col mx-4 mt-10 pr-8 space-y-4 overflow-y-auto">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-lg font-medium px-4 py-3 rounded-lg transition-all ${
+                  className={`flex items-center gap-3 text-lg font-medium px-4 py-3 rounded-lg transition-all ${
                     isActive(link.href)
                       ? "bg-primary text-primary-foreground font-bold"
                       : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
+                  <link.icon className="h-5 w-5" />
                   {link.label}
                 </Link>
               ))}
-            </div>
             <div className="p-4 border-t border-border">
               <Button asChild className="rounded-full w-full">
                 <Link href="/book" onClick={() => setIsOpen(false)}>
@@ -126,6 +126,7 @@ export function Navbar() {
               </Button>
             </div>
           </div>
+        </div>
         )}
       </div>
     </nav>

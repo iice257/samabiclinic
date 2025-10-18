@@ -7,16 +7,16 @@ export default function HomePage() {
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative pt-32 pb-20 lg:pt-40 lg:pb-32 overflow-hidden">
+      <section className="relative pt-24 pb-16 lg:pt-40 lg:pb-32 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent" />
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
+            <div className="space-y-6">
               <div className="inline-flex items-center space-x-2 bg-primary/10 text-primary px-4 py-2 rounded-full text-sm font-medium">
                 <Sparkles className="h-4 w-4" />
                 <span>Personalized Functional Medicine</span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight text-balance">
+              <h1 className="text-4xl md:text-5xl font-bold text-foreground leading-tight text-balance">
                 Transform Your Health, Reclaim Your Life
               </h1>
               <p className="text-lg text-muted-foreground leading-relaxed text-pretty">
@@ -35,7 +35,7 @@ export default function HomePage() {
                 </Button>
               </div>
             </div>
-            <div className="relative">
+            <div className="relative mt-10 lg:mt-0">
               <div className="aspect-square rounded-2xl overflow-hidden bg-muted">
                 <img
                   src="/peaceful-wellness-meditation-nature.jpg"
@@ -43,14 +43,14 @@ export default function HomePage() {
                   className="w-full h-full object-cover"
                 />
               </div>
-              <div className="absolute -bottom-6 -left-6 bg-card p-6 rounded-xl shadow-lg border border-border">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center">
-                    <Heart className="h-6 w-6 text-primary" />
+              <div className="absolute -bottom-6 -right-6 sm:-bottom-8 sm:-right-8 md:-bottom-6 md:-left-6 bg-card p-4 sm:p-6 rounded-xl shadow-lg border border-border">
+                <div className="flex items-center space-x-3 sm:space-x-4">
+                  <div className="w-10 h-10 sm:w-12 sm:h-12 bg-primary/10 rounded-full flex items-center justify-center">
+                    <Heart className="h-5 w-5 sm:h-6 sm:w-6 text-primary" />
                   </div>
                   <div>
-                    <p className="font-semibold text-foreground">500+</p>
-                    <p className="text-sm text-muted-foreground">Lives Transformed</p>
+                    <p className="font-semibold text-foreground text-base sm:text-lg">500+</p>
+                    <p className="text-xs sm:text-sm text-muted-foreground">Lives Transformed</p>
                   </div>
                 </div>
               </div>

@@ -235,7 +235,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
           </div>
 
           <div className="space-y-2">
-            <Label htmlFor="slug">Slug *</Label>
+            <Label htmlFor="slug">URL *</Label>
             <Input
               id="slug"
               name="slug"
@@ -247,7 +247,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
             />
             {!isEditing && (
               <p className="text-xs text-muted-foreground">
-                Auto-generated from title. If a slug already exists, a number will be appended automatically.
+                Auto-generated from title. If a URL already exists, a number will be appended automatically.
               </p>
             )}
           </div>

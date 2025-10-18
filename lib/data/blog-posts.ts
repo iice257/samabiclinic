@@ -97,6 +97,7 @@ Your gut health is foundational to your overall wellbeing. By supporting your mi
     tags: ["Immunity", "Gut Health", "Nutrition", "Microbiome"],
     image: "/gut-health-digestive-wellness-functional-medicine.jpg",
   },
+  
   {
     slug: "science-behind-adrenal-fatigue",
     title: "The Science Behind Adrenal Fatigue",
@@ -237,6 +238,7 @@ If you're struggling with persistent fatigue, don't accept it as your new normal
     tags: ["Adrenal Health", "Chronic Fatigue", "Stress", "Hormones"],
     image: "/chronic-fatigue-recovery-energy-restoration.jpg",
   },
+  
   {
     slug: "balancing-hormones-naturally-30s-40s",
     title: "Balancing Hormones Naturally in Your 30s and 40s",
@@ -445,6 +447,7 @@ Don't accept hormonal symptoms as an inevitable part of aging. With the right ap
     tags: ["Hormones", "Women's Health", "Men's Health", "Aging", "Nutrition"],
     image: "/hormonal-balance-wellness-natural-health.jpg",
   },
+  
   {
     slug: "inflammation-hidden-root-chronic-disease",
     title: "Inflammation: The Hidden Root of Chronic Disease",
@@ -638,6 +641,7 @@ Don't wait for disease to develop. Take action now to reduce inflammation and in
     tags: ["Inflammation", "Chronic Disease", "Nutrition", "Prevention"],
     image: "/gut-health-digestive-wellness-functional-medicine.jpg",
   },
+  
   {
     slug: "thyroid-health-complete-guide",
     title: "Thyroid Health: A Complete Guide to Optimization",
@@ -875,6 +879,7 @@ If you're struggling with thyroid issues, don't settle for feeling less than you
     tags: ["Thyroid", "Hormones", "Metabolism", "Energy", "Autoimmune"],
     image: "/hormonal-balance-wellness-natural-health.jpg",
   },
+  
   {
     slug: "sleep-optimization-guide",
     title: "The Ultimate Guide to Sleep Optimization",
