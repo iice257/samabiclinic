@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { CalendarIcon, Clock, User } from "lucide-react"
 import { Card } from "@/components/ui/card"
@@ -10,7 +12,7 @@ export default function BookingPage() {
   const [showNewsletterPopup, setShowNewsletterPopup] = useState(false)
 
   const handleAppointmentBooked = () => {
-    // setShowNewsletterPopup(true) // Will be enabled later
+    setShowNewsletterPopup(true)
   }
 
   return (
@@ -63,20 +65,40 @@ export default function BookingPage() {
         <div className="container mx-auto max-w-4xl text-center">
           <h2 className="mb-6 font-bold text-2xl text-foreground md:text-3xl">What to Expect</h2>
           <div className="grid gap-6 md:grid-cols-3">
-            <InfoStep title="Comprehensive Assessment" description="We'll review your health history, symptoms, and lifestyle in detail." step={1} />
-            <InfoStep title="Personalized Plan" description="Receive a customized treatment strategy based on your unique needs." step={2} />
-            <InfoStep title="Ongoing Support" description="Get continuous guidance and adjustments as you progress toward optimal health." step={3} />
+            <InfoStep
+              title="Comprehensive Assessment"
+              description="We'll review your health history, symptoms, and lifestyle in detail."
+              step={1}
+            />
+            <InfoStep
+              title="Personalized Plan"
+              description="Receive a customized treatment strategy based on your unique needs."
+              step={2}
+            />
+            <InfoStep
+              title="Ongoing Support"
+              description="Get continuous guidance and adjustments as you progress toward optimal health."
+              step={3}
+            />
           </div>
         </div>
       </section>
 
-      {/* {showNewsletterPopup && <NewsletterPopup onClose={() => setShowNewsletterPopup(false)} />} */}
+      {showNewsletterPopup && <NewsletterPopup onClose={() => setShowNewsletterPopup(false)} />}
     </main>
   )
 }
 
-const InfoCard = ({ icon: Icon, title, description, delay }: { icon: React.ElementType, title: string, description: string, delay: number }) => (
-  <Card className="border-border/50 bg-card p-6 animate-in fade-in slide-in-from-left-8 duration-1000" style={{ animationDelay: `${delay}ms` }}>
+const InfoCard = ({
+  icon: Icon,
+  title,
+  description,
+  delay,
+}: { icon: React.ElementType; title: string; description: string; delay: number }) => (
+  <Card
+    className="border-border/50 bg-card p-6 animate-in fade-in slide-in-from-left-8 duration-1000"
+    style={{ animationDelay: `${delay}ms` }}
+  >
     <div className="mb-4 gap-4 inline-flex rounded-full bg-primary/10 p-3">
       <Icon className="h-6 w-6 text-primary" />
       <h3 className="font-semibold text-foreground text-lg">{title}</h3>
@@ -85,8 +107,11 @@ const InfoCard = ({ icon: Icon, title, description, delay }: { icon: React.Eleme
   </Card>
 )
 
-const InfoStep = ({ title, description, step }: { title: string, description: string, step: number }) => (
-  <div className={`animate-in fade-in slide-in-from-bottom-4 duration-1000`} style={{ animationDelay: `${step * 100}ms` }}>
+const InfoStep = ({ title, description, step }: { title: string; description: string; step: number }) => (
+  <div
+    className={`animate-in fade-in slide-in-from-bottom-4 duration-1000`}
+    style={{ animationDelay: `${step * 100}ms` }}
+  >
     <div className="mb-3 text-4xl font-bold text-primary">{step}</div>
     <h3 className="mb-2 font-semibold text-foreground">{title}</h3>
     <p className="text-muted-foreground text-sm">{description}</p>

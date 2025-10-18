@@ -6,18 +6,11 @@ import Image from "next/image"
 import Link from "next/link"
 import { createClient } from "@/lib/supabase/client"
 import { Badge } from "@/components/ui/badge"
-import { Button } from "@/components/ui/button"
 import { Calendar, Clock, ArrowLeft } from "lucide-react"
 import ReactMarkdown from "react-markdown"
 import { LikeButton } from "@/components/blog/like-button"
 import { CommentSection } from "@/components/blog/comment-section"
 import { NewsletterPopup } from "@/components/layout/newsletter-popup"
-
-  const handleCommentSubmitted = () => {
-    setShowNewsletterPopup(true)
-  }
-
-      {showNewsletterPopup && <NewsletterPopup onClose={() => setShowNewsletterPopup(false)} />}
 
 type BlogPost = Tables<"blog_posts">
 
@@ -43,10 +36,6 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
     }
     fetchLikes()
   }, [post.id, supabase])
-
-  const handleCommentSubmitted = () => {
-    // setShowNewsletterPopup(true) // Will be enabled later
-  }
 
   return (
     <main className="min-h-screen">
@@ -92,7 +81,7 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
         <section className="px-4 py-8">
           <div className="container mx-auto max-w-4xl">
             <div className="relative aspect-[21/9] overflow-hidden rounded-2xl animate-in fade-in slide-in-from-bottom-4 duration-1000 delay-200">
-              <Image src={post.image} alt={post.title} fill className="object-cover" />
+              <Image src={post.image || "/placeholder.svg"} alt={post.title} fill className="object-cover" />
             </div>
           </div>
         </section>
@@ -116,12 +105,12 @@ export function BlogPostClient({ post }: BlogPostClientProps) {
           </div>
 
           <div className="mt-12">
-            <CommentSection postId={post.id} onCommentSubmitted={handleCommentSubmitted} />
+            <CommentSection postId={post.id} onCommentSubmitted={() => setShowNewsletterPopup(true)} />
           </div>
         </div>
       </article>
 
-      {/* {showNewsletterPopup && <NewsletterPopup onClose={() => setShowNewsletterPopup(false)} />} */}
+      {showNewsletterPopup && <NewsletterPopup onClose={() => setShowNewsletterPopup(false)} />}
     </main>
   )
 }

@@ -4,7 +4,7 @@ import type React from "react"
 
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
-import { CalendarIcon, Clock, User, Mail, Phone, MessageSquare } from "lucide-react"
+import { CalendarIcon, User, Mail, Phone, MessageSquare } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
@@ -137,11 +137,7 @@ export function BookingForm({ onAppointmentBooked }: BookingFormProps) {
         <h3 className="font-semibold text-foreground text-xl">Appointment Details</h3>
         <div className="space-y-2">
           <Label htmlFor="service">Service Type *</Label>
-          <Select
-            value={formData.service}
-            onValueChange={(value) => handleInputChange("service", value)}
-            required
-          >
+          <Select value={formData.service} onValueChange={(value) => handleInputChange("service", value)} required>
             <SelectTrigger>
               <SelectValue placeholder="Select a service" />
             </SelectTrigger>
@@ -159,10 +155,7 @@ export function BookingForm({ onAppointmentBooked }: BookingFormProps) {
             <Label>Preferred Date *</Label>
             <Popover>
               <PopoverTrigger asChild>
-                <Button
-                  variant="outline"
-                  className="w-full justify-start text-left font-normal"
-                >
+                <Button variant="outline" className="w-full justify-start text-left font-normal bg-transparent">
                   <CalendarIcon className="mr-2 h-4 w-4" />
                   {date ? format(date, "PPP") : <span>Pick a date</span>}
                 </Button>

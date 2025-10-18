@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { Send } from "lucide-react"
 import { toast } from "sonner"
+import { createClient } from "@/lib/supabase/client"
 
 interface ContactFormProps {
   onFormSubmitted: () => void
@@ -24,6 +25,7 @@ export function ContactForm({ onFormSubmitted }: ContactFormProps) {
     message: "",
   })
   const [isLoading, setIsLoading] = useState(false)
+  const supabase = createClient()
 
   const handleInputChange = (field: string, value: string) => {
     setFormData((prev) => ({ ...prev, [field]: value }))
@@ -33,14 +35,24 @@ export function ContactForm({ onFormSubmitted }: ContactFormProps) {
     e.preventDefault()
     setIsLoading(true)
 
-    // Mock submission since there's no table
-    await new Promise(resolve => setTimeout(resolve, 1000))
-    console.log("Contact form submitted:", formData)
+    const { error } = await supabase.from("contact_submissions").insert({
+      name: formData.name,
+      email: formData.email,
+      phone: formData.phone,
+      subject: formData.subject,
+      message: formData.message,
+    })
 
     setIsLoading(false)
-    toast.success("Your message has been sent successfully!")
-    setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
-    onFormSubmitted()
+
+    if (error) {
+      toast.error("Failed to send message. Please try again.")
+      console.error("Error submitting contact form:", error)
+    } else {
+      toast.success("Your message has been sent successfully!")
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
+      onFormSubmitted()
+    }
   }
 
   return (
@@ -82,11 +94,7 @@ export function ContactForm({ onFormSubmitted }: ContactFormProps) {
 
       <div className="space-y-2">
         <Label htmlFor="subject">Subject *</Label>
-        <Select
-          value={formData.subject}
-          onValueChange={(value) => handleInputChange("subject", value)}
-          required
-        >
+        <Select value={formData.subject} onValueChange={(value) => handleInputChange("subject", value)} required>
           <SelectTrigger>
             <SelectValue placeholder="Select a subject" />
           </SelectTrigger>
