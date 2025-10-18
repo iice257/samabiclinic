@@ -4,6 +4,7 @@ import { Inter } from "next/font/google"
 import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
+import { LayoutWrapper } from "./layout-wrapper"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -45,13 +46,11 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const isAdminRoute = false // This will be checked in the component
-
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
         <Suspense fallback={<div>Loading...</div>}>
-          {children}
+          <LayoutWrapper>{children}</LayoutWrapper>
           <Analytics />
         </Suspense>
       </body>

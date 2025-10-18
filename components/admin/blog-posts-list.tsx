@@ -4,8 +4,7 @@ import { useEffect, useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Card, CardContent } from "@/components/ui/card"
 import { Button } from "@/components/ui/button"
-import { Badge } from "@/components/ui/badge"
-import { Edit, Trash2 } from "lucide-react"
+import { Edit, Trash2, ChevronDown, ChevronUp } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
 
@@ -15,7 +14,6 @@ interface BlogPost {
   slug: string
   author: string
   category: string
-  published: boolean
   status: string
   created_at: string
 }
@@ -23,6 +21,7 @@ interface BlogPost {
 export function BlogPostsList() {
   const [posts, setPosts] = useState<BlogPost[]>([])
   const [isLoading, setIsLoading] = useState(true)
+  const [expandedPosts, setExpandedPosts] = useState<Set<string>>(new Set())
 
   useEffect(() => {
     fetchPosts()
@@ -33,7 +32,7 @@ export function BlogPostsList() {
       const supabase = createClient()
       const { data, error } = await supabase
         .from("blog_posts")
-        .select("id, title, slug, author, category, published, status, created_at")
+        .select("id, title, slug, author, category, status, created_at")
         .order("created_at", { ascending: false })
 
       if (error) throw error
@@ -62,6 +61,16 @@ export function BlogPostsList() {
     }
   }
 
+  const toggleExpanded = (postId: string) => {
+    const newExpanded = new Set(expandedPosts)
+    if (newExpanded.has(postId)) {
+      newExpanded.delete(postId)
+    } else {
+      newExpanded.add(postId)
+    }
+    setExpandedPosts(newExpanded)
+  }
+
   if (isLoading) {
     return <div className="text-center py-10">Loading posts...</div>
   }
@@ -80,24 +89,29 @@ export function BlogPostsList() {
   }
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-2">
       {posts.map((post) => (
         <Card key={post.id}>
-          <CardContent className="p-6">
-            <div className="flex items-start justify-between">
-              <div className="flex-1">
-                <div className="flex items-center gap-2 mb-2">
-                  <h3 className="text-xl font-semibold">{post.title}</h3>
-                  <Badge variant={post.status === "draft" ? "secondary" : "default"}>
-                    {post.status === "draft" ? "Draft" : "Published"}
-                  </Badge>
-                </div>
-                <div className="flex items-center gap-4 text-sm text-muted-foreground">
-                  <span>{post.author}</span>
-                  <span>•</span>
-                  <span>{post.category}</span>
-                  <span>•</span>
-                  <span>{new Date(post.created_at).toLocaleDateString()}</span>
+          <CardContent className="p-4">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-3 flex-1">
+                <button onClick={() => toggleExpanded(post.id)} className="p-1 hover:bg-muted rounded">
+                  {expandedPosts.has(post.id) ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+                </button>
+                <div className="flex-1">
+                  <div className="flex items-center gap-2">
+                    <span className="font-medium">{post.title}</span>
+                    <span className="text-sm text-muted-foreground">
+                      - {post.status === "draft" ? "draft" : "published"}
+                    </span>
+                  </div>
+                  {expandedPosts.has(post.id) && (
+                    <div className="mt-2 text-sm text-muted-foreground space-y-1">
+                      <p>Author: {post.author}</p>
+                      <p>Category: {post.category}</p>
+                      <p>Created: {new Date(post.created_at).toLocaleDateString()}</p>
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="flex gap-2">

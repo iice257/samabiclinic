@@ -4,9 +4,11 @@ import { useState } from "react"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { BookOpen, Plus } from "lucide-react"
+import { BookOpen, Plus, Mail, Calendar } from "lucide-react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { BlogPostsList } from "@/components/admin/blog-posts-list"
+import { NewsletterManagement } from "@/components/admin/newsletter-management"
+import { BookingManagement } from "@/components/admin/booking-management"
 
 export default function AdminDashboard() {
   const [activeTab, setActiveTab] = useState("overview")
@@ -19,9 +21,11 @@ export default function AdminDashboard() {
       </div>
 
       <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-        <TabsList className="grid w-full grid-cols-3">
+        <TabsList className="grid w-full grid-cols-5">
           <TabsTrigger value="overview">Overview</TabsTrigger>
-          <TabsTrigger value="blog">Blog Posts</TabsTrigger>
+          <TabsTrigger value="blog">Blog</TabsTrigger>
+          <TabsTrigger value="newsletters">Newsletters</TabsTrigger>
+          <TabsTrigger value="bookings">Bookings</TabsTrigger>
           <TabsTrigger value="new-post">New Post</TabsTrigger>
         </TabsList>
 
@@ -60,11 +64,53 @@ export default function AdminDashboard() {
                 </CardContent>
               </Card>
             </Link>
+
+            <Link href="/admin/newsletters">
+              <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-purple-500/10 text-purple-600 flex items-center justify-center mb-4">
+                    <Mail className="h-6 w-6" />
+                  </div>
+                  <CardTitle>Newsletters</CardTitle>
+                  <CardDescription>Manage newsletters and subscribers</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button variant="outline" className="w-full bg-transparent">
+                    Manage
+                  </Button>
+                </CardContent>
+              </Card>
+            </Link>
+
+            <Link href="/admin/bookings">
+              <Card className="h-full hover:shadow-lg transition-all hover:-translate-y-1 cursor-pointer">
+                <CardHeader>
+                  <div className="w-12 h-12 rounded-lg bg-orange-500/10 text-orange-600 flex items-center justify-center mb-4">
+                    <Calendar className="h-6 w-6" />
+                  </div>
+                  <CardTitle>Bookings</CardTitle>
+                  <CardDescription>View and manage appointments</CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <Button variant="outline" className="w-full bg-transparent">
+                    Manage
+                  </Button>
+                </CardContent>
+              </Card>
+            </Link>
           </div>
         </TabsContent>
 
         <TabsContent value="blog" className="space-y-4">
           <BlogPostsList />
+        </TabsContent>
+
+        <TabsContent value="newsletters" className="space-y-4">
+          <NewsletterManagement />
+        </TabsContent>
+
+        <TabsContent value="bookings" className="space-y-4">
+          <BookingManagement />
         </TabsContent>
 
         <TabsContent value="new-post" className="space-y-4">
