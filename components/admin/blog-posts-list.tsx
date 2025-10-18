@@ -16,6 +16,7 @@ interface BlogPost {
   author: string
   category: string
   published: boolean
+  status: string
   created_at: string
 }
 
@@ -32,7 +33,7 @@ export function BlogPostsList() {
       const supabase = createClient()
       const { data, error } = await supabase
         .from("blog_posts")
-        .select("id, title, slug, author, category, published, created_at")
+        .select("id, title, slug, author, category, published, status, created_at")
         .order("created_at", { ascending: false })
 
       if (error) throw error
@@ -87,8 +88,8 @@ export function BlogPostsList() {
               <div className="flex-1">
                 <div className="flex items-center gap-2 mb-2">
                   <h3 className="text-xl font-semibold">{post.title}</h3>
-                  <Badge variant={post.published ? "default" : "secondary"}>
-                    {post.published ? "Published" : "Draft"}
+                  <Badge variant={post.status === "draft" ? "secondary" : "default"}>
+                    {post.status === "draft" ? "Draft" : "Published"}
                   </Badge>
                 </div>
                 <div className="flex items-center gap-4 text-sm text-muted-foreground">

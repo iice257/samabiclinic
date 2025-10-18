@@ -34,7 +34,7 @@ export function Navbar() {
     { href: "/about", label: "About" },
     { href: "/contact", label: "Contact" },
   ]
-  
+
   const isActive = (href: string) => {
     if (href === "/") {
       return pathname === "/"
@@ -63,14 +63,15 @@ export function Navbar() {
             </div>
           </Link>
 
-          {/* Desktop Navigation */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-1 bg-muted/30 rounded-full px-2 py-1">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
-                className={`text-sm font-medium transition-colors ${
-                  isActive(link.href) ? "text-primary font-semibold" : "text-foreground/80 hover:text-foreground"
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 ${
+                  isActive(link.href)
+                    ? "bg-primary text-primary-foreground font-bold shadow-md"
+                    : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
                 }`}
               >
                 {link.label}
@@ -99,22 +100,25 @@ export function Navbar() {
           </div>
         </div>
 
-        {/* Mobile Menu */}
         {isOpen && (
-          <div className="md:hidden py-4 border-t border-border">
-            <div className="flex flex-col space-y-4">
+          <div className="fixed inset-0 top-20 md:hidden bg-background/95 backdrop-blur-lg z-40 flex flex-col">
+            <div className="flex-1 flex flex-col justify-start pt-8 px-4 space-y-4 overflow-y-auto">
               {navLinks.map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className={`text-sm font-medium px-2 transition-colors ${
-                    isActive(link.href) ? "text-primary font-semibold" : "text-foreground/80 hover:text-foreground"
+                  className={`text-lg font-medium px-4 py-3 rounded-lg transition-all ${
+                    isActive(link.href)
+                      ? "bg-primary text-primary-foreground font-bold"
+                      : "text-foreground/80 hover:text-foreground hover:bg-muted/50"
                   }`}
                   onClick={() => setIsOpen(false)}
                 >
                   {link.label}
                 </Link>
               ))}
+            </div>
+            <div className="p-4 border-t border-border">
               <Button asChild className="rounded-full w-full">
                 <Link href="/book" onClick={() => setIsOpen(false)}>
                   Book Consultation

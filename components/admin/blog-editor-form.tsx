@@ -98,8 +98,8 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
         cursorOffset = selectedText ? newText.length : 1
         break
       case "underline":
-        newText = `<u>${selectedText || "underlined text"}</u>`
-        cursorOffset = selectedText ? newText.length : 3
+        newText = `__${selectedText || "underlined text"}__`
+        cursorOffset = selectedText ? newText.length : 2
         break
       case "h1":
         newText = `\n# ${selectedText || "Heading 1"}\n`
@@ -153,17 +153,14 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
         return slug
       }
 
-      // If no post found with this slug, it's unique
       if (!data || data.length === 0) {
         return slug
       }
 
-      // If editing and the only post with this slug is the current post, it's unique
       if (currentPostId && data.length === 1 && data[0].id === currentPostId) {
         return slug
       }
 
-      // Slug exists, try with a number appended
       slug = `${baseSlug}-${counter}`
       counter++
     }
@@ -192,6 +189,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
         tags: tagsArray,
         image: formData.image,
         published: publish,
+        status: publish ? "published" : "draft",
       }
 
       let error
@@ -205,7 +203,11 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
 
       if (error) throw error
 
-      toast.success(isEditing ? `Post ${publish ? "published" : "updated"} successfully!` : `Draft saved successfully!`)
+      const message = isEditing
+        ? `Post ${publish ? "published" : "updated"} successfully!`
+        : `${publish ? "Post published" : "Draft saved"} successfully!`
+
+      toast.success(message)
       router.push("/admin/blog")
       router.refresh()
     } catch (error) {
@@ -283,7 +285,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
                 name="category"
                 value={formData.category}
                 onChange={handleInputChange}
-                placeholder="Gut Health, Hormones, etc."
+                placeholder="Mental Health, Psychiatry, etc."
                 required
               />
             </div>
@@ -296,7 +298,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
               name="tags"
               value={formData.tags}
               onChange={handleInputChange}
-              placeholder="nutrition, wellness, health"
+              placeholder="depression, anxiety, wellness"
             />
           </div>
 
