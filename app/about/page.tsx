@@ -52,16 +52,16 @@ export default function AboutPage() {
               <h2 className="mb-6 font-bold text-3xl text-foreground md:text-4xl">Our Story</h2>
               <div className="space-y-4 text-muted-foreground leading-relaxed">
                 <p>
-                  At Samabi Functional Medicine Clinic, we practice medicine that listens deeply. Our team combines conventional diagnostics with
-                  holistic healing to uncover what your body truly needs.
+                  At SAMABI Functional Medicine Clinic, we combine the science of psychiatry with the precision of
+                  functional medicine to restore balance to both mind and body.
                 </p>
                 <p>
-                  Founded by experts in integrative and functional medicine, our clinic was built on one principle:
-                  every patient deserves care that addresses the whole person, not just the symptoms.
+                  Founded by experts in integrative psychiatry and functional medicine, our clinic was built on one
+                  principle: every patient deserves care that addresses the whole person, not just the symptoms.
                 </p>
                 <p>
                   We believe in the power of understanding root causes, personalized treatment plans, and empowering our
-                  patients with knowledge and tools for lasting health.
+                  patients with knowledge and tools for lasting mental and physical health.
                 </p>
               </div>
             </div>
@@ -74,9 +74,7 @@ export default function AboutPage() {
         <div className="container mx-auto max-w-6xl">
           <div className="mb-12 text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
             <h2 className="mb-4 font-bold text-3xl text-foreground md:text-4xl">Meet Our Founder</h2>
-            <p className="mx-auto max-w-2xl text-balance text-muted-foreground text-lg">
-              The Expert.
-            </p>
+            <p className="mx-auto max-w-2xl text-balance text-muted-foreground text-lg">The Expert.</p>
           </div>
 
           <div className="mx-auto max-w-2xl">
@@ -91,13 +89,16 @@ export default function AboutPage() {
               </div>
               <div className="p-6">
                 <h3 className="mb-2 font-semibold text-foreground text-xl">Dr. Abimbola Kazeem</h3>
-                <p className="mb-4 font-medium text-primary text-sm">15+ years in psychiatry and integrative wellness, redefining mental health care in Nigeria.</p>
+                <p className="mb-4 font-medium text-primary text-sm">
+                  Psychiatrist and Functional Medicine Specialist. 15+ years transforming mental health care through
+                  integrated, root-cause medicine.
+                </p>
                 <p className="text-muted-foreground text-sm leading-relaxed">
-                  With over 15 years of experience in integrative medicine, Dr. Kazeem founded Samabi to provide
-                  personalized, root-cause healthcare. He specializes in complex chronic conditions, hormonal
-                  imbalances, metabolic health, and nutritional therapy. His approach combines advanced diagnostics with
-                  evidence-based holistic treatment protocols, empowering patients to achieve lasting wellness and
-                  vitality.
+                  With over 15 years of experience in psychiatry and functional medicine, Dr. Kazeem founded SAMABI to
+                  provide personalized, root-cause healthcare. He specializes in complex psychiatric conditions, mood
+                  disorders, anxiety, trauma, and the metabolic factors that influence mental health. His approach
+                  combines advanced diagnostics with evidence-based holistic treatment protocols, empowering patients to
+                  achieve lasting wellness and mental clarity.
                 </p>
               </div>
             </Card>
@@ -123,7 +124,8 @@ export default function AboutPage() {
               </div>
               <h3 className="mb-6 font-semibold text-foreground text-xl">Empathy & Evidence</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                We combine compassionate care with rigorous scientific evidence to provide treatment that truly works.
+                We combine compassionate psychiatric care with rigorous scientific evidence to provide treatment that
+                truly works.
               </p>
             </Card>
 
@@ -134,7 +136,8 @@ export default function AboutPage() {
               </div>
               <h3 className="mb-6 font-semibold text-foreground text-xl">Personalized Care</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                Every patient is unique. We design treatment plans tailored to your biology, lifestyle, and goals.
+                Every patient is unique. We design treatment plans tailored to your mental health needs, biology,
+                lifestyle, and goals.
               </p>
             </Card>
 
@@ -145,7 +148,8 @@ export default function AboutPage() {
               </div>
               <h3 className="mb-6 font-semibold text-foreground text-xl">Continuous Discovery</h3>
               <p className="text-muted-foreground text-sm leading-relaxed">
-                We stay at the forefront of functional medicine research to bring you the most effective treatments.
+                We stay at the forefront of psychiatric and functional medicine research to bring you the most effective
+                treatments for mental health.
               </p>
             </Card>
           </div>
@@ -156,10 +160,11 @@ export default function AboutPage() {
       <section className="bg-gradient-to-br from-primary/10 via-background to-accent/10 px-4 py-16 md:py-24">
         <div className="container mx-auto max-w-4xl text-center animate-in fade-in slide-in-from-bottom-4 duration-1000">
           <h2 className="mb-6 text-balance font-bold text-3xl text-foreground md:text-4xl">
-            Ready to experience personalized care?
+            Ready to experience personalized psychiatric care?
           </h2>
           <p className="mb-8 text-balance text-muted-foreground text-lg leading-relaxed">
-            Join hundreds of patients who have transformed their health with our root-cause approach.
+            Join hundreds of patients who have transformed their mental health and wellbeing with our integrated
+            approach.
           </p>
           <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
             <Button size="lg" className="group w-full sm:w-auto" asChild>

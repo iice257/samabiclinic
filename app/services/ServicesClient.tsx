@@ -7,50 +7,55 @@ import { Button } from "@/components/ui/button"
 const services = [
   {
     icon: Microscope,
-    title: "Diagnostics & Lab Testing",
+    title: "Mental Health and Behavioral Medicine",
     description:
-      "Gain clarity through comprehensive functional panels for hormones, gut health, and metabolism. We use advanced testing to uncover the root causes of your symptoms.",
+      "Comprehensive, compassionate care for mental health conditions, blending medical expertise with holistic healing.",
     features: [
-      "Comprehensive hormone panels",
-      "Gut microbiome analysis",
-      "Metabolic function testing",
-      "Nutritional deficiency screening",
+      "Psychiatric evaluation and diagnosis",
+      "Medication management and monitoring",
+      "Psychotherapy (CBT, trauma-focused, stress management)",
+      "Treatment of depression, anxiety, insomnia, and mood disorders",
+      "Adolescent and young adult mental health care",
+      "Addiction and substance use disorder treatment",
+      "Stress and burnout recovery for professionals",
     ],
   },
   {
     icon: Heart,
-    title: "Integrative Treatments",
+    title: "Functional Medicine Consultations",
     description:
-      "Natural and clinical interventions customized for your unique biology. We combine the best of conventional and holistic medicine.",
+      "Uncover why illness develops, not just what it is. We use advanced diagnostic tools to identify nutritional, hormonal, inflammatory, and metabolic imbalances.",
     features: [
-      "Personalized treatment protocols",
-      "Evidence-based interventions",
-      "Natural therapeutic options",
+      "Root cause analysis of health conditions",
+      "Advanced diagnostic testing",
+      "Personalized treatment planning",
+      "Integration of nutrition and lifestyle therapy",
       "Ongoing monitoring and adjustment",
     ],
   },
   {
     icon: Apple,
-    title: "Nutritional Therapy",
+    title: "Nutritional Psychiatry and Therapeutic Diets",
     description:
-      "Build lasting energy through targeted diet and micronutrient support. Nutrition is the foundation of functional medicine.",
+      "Explore how food affects the brain, mood, and metabolism. Evidence-based nutritional interventions for mental health.",
     features: [
-      "Customized meal planning",
-      "Supplement recommendations",
-      "Food sensitivity testing",
-      "Metabolic nutrition coaching",
+      "Ketogenic therapy for mood disorders and metabolic brain dysfunction",
+      "Anti-inflammatory and brain-supportive diets",
+      "Nutritional supplementation for micronutrient deficiencies",
+      "Collaboration with dietitians for personalized meal planning",
     ],
   },
   {
     icon: Leaf,
-    title: "Lifestyle Optimization",
+    title: "Management of Chronic Medical Conditions",
     description:
-      "Rewire habits for stress, sleep, and longevity. Sustainable health requires sustainable lifestyle changes.",
+      "Integrative care for chronic illnesses, combining medical treatment with root-cause analysis and lifestyle optimization.",
     features: [
-      "Stress management strategies",
-      "Sleep optimization protocols",
-      "Movement and exercise guidance",
-      "Mindfulness and recovery practices",
+      "Hypertension and cardiovascular health",
+      "Diabetes and insulin resistance management",
+      "Autoimmune disorder treatment",
+      "Thyroid disorder management",
+      "Metabolic syndrome and obesity treatment",
     ],
   },
 ]
@@ -63,11 +68,11 @@ export default function ServicesClient() {
         <div className="container mx-auto px-4 md:px-8 max-w-7xl">
           <div className="max-w-3xl mx-auto text-center space-y-6">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold text-balance">
-              Our approach blends science, precision, and compassion
+              Comprehensive psychiatric and functional medicine care
             </h1>
             <p className="text-lg md:text-xl text-muted-foreground text-pretty">
-              We restore your health through comprehensive diagnostics, personalized care, and evidence-based treatments
-              tailored to your unique biology.
+              At SAMABI, we combine the science of psychiatry with the precision of functional medicine to restore
+              balance to both mind and body. We look beyond symptoms to identify and treat the root causes of illness.
             </p>
           </div>
         </div>

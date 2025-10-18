@@ -59,53 +59,6 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Statistics Section */}
-      <section className="py-16 lg:py-20 bg-gradient-to-br from-primary/5 via-accent/5 to-transparent">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-            <Card className="border-border hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6 text-center space-y-2">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Users className="h-6 w-6 text-primary" />
-                </div>
-                <p className="text-3xl md:text-4xl font-bold text-foreground">500+</p>
-                <p className="text-sm text-muted-foreground">Lives Transformed</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6 text-center space-y-2">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Clock className="h-6 w-6 text-primary" />
-                </div>
-                <p className="text-3xl md:text-4xl font-bold text-foreground">15+</p>
-                <p className="text-sm text-muted-foreground">Years Practicing</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6 text-center space-y-2">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <TrendingUp className="h-6 w-6 text-primary" />
-                </div>
-                <p className="text-3xl md:text-4xl font-bold text-foreground">95%</p>
-                <p className="text-sm text-muted-foreground">Success Rate</p>
-              </CardContent>
-            </Card>
-
-            <Card className="border-border hover:shadow-lg transition-all duration-300">
-              <CardContent className="p-6 text-center space-y-2">
-                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
-                  <Star className="h-6 w-6 text-primary" />
-                </div>
-                <p className="text-3xl md:text-4xl font-bold text-foreground">4.9/5</p>
-                <p className="text-sm text-muted-foreground">Patient Satisfaction</p>
-              </CardContent>
-            </Card>
-          </div>
-        </div>
-      </section>
-
       {/* Philosophy Section */}
       <section className="py-20 lg:py-32 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -214,7 +167,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Testimonials Section */}
+      {/* Testimonials Section with Statistics */}
       <section className="py-20 lg:py-32 bg-card">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="text-center max-w-3xl mx-auto mb-16">
@@ -222,8 +175,58 @@ export default function HomePage() {
               Real Stories, Real Results
             </h2>
             <p className="text-lg text-muted-foreground leading-relaxed">
-              Hear from patients who've transformed their health with Samabi.
+              Hear from patients who've transformed their mental health and wellbeing with SAMABI.
             </p>
+          </div>
+
+          <div className="grid grid-cols-2 lg:grid-cols-4 gap-6 mb-16">
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Users className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">
+                  <span className="font-bold">500+</span>
+                </p>
+                <p className="text-sm text-muted-foreground">Lives Transformed</p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Clock className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">
+                  <span className="font-bold">15+</span>
+                </p>
+                <p className="text-sm text-muted-foreground">Years Practicing</p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <TrendingUp className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">
+                  <span className="font-bold">95%</span>
+                </p>
+                <p className="text-sm text-muted-foreground">Success Rate</p>
+              </CardContent>
+            </Card>
+
+            <Card className="border-border hover:shadow-lg transition-all duration-300">
+              <CardContent className="p-6 text-center space-y-2">
+                <div className="w-12 h-12 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-3">
+                  <Star className="h-6 w-6 text-primary" />
+                </div>
+                <p className="text-3xl md:text-4xl font-bold text-foreground">
+                  <span className="font-bold">4.9/5</span>
+                </p>
+                <p className="text-sm text-muted-foreground">Patient Satisfaction</p>
+              </CardContent>
+            </Card>
           </div>
 
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -231,21 +234,21 @@ export default function HomePage() {
               {
                 number: 1,
                 quote:
-                  "After years of digestive issues, Dr. Abimbola Kazeem's approach finally gave me answers. I feel like myself again.",
+                  "After years of struggling with anxiety and depression, Dr. Kazeem's integrated approach finally gave me real relief. I feel like myself again.",
                 author: "Chioma O.",
                 role: "Lagos",
               },
               {
                 number: 2,
                 quote:
-                  "The personalized care I received was life-changing. My energy levels are better than they've been in a decade.",
+                  "The personalized psychiatric care combined with functional medicine was transformative. My mood and energy have never been better.",
                 author: "Tunde A.",
                 role: "Abuja",
               },
               {
                 number: 3,
                 quote:
-                  "Samabi doesn't just treat symptoms—they helped me understand my body and take control of my health.",
+                  "SAMABI doesn't just treat symptoms—they helped me understand the root causes of my mental health challenges and gave me tools for lasting wellness.",
                 author: "Amara N.",
                 role: "Port Harcourt",
               },
@@ -255,21 +258,7 @@ export default function HomePage() {
                   <div className="absolute top-4 right-4 w-10 h-10 rounded-full bg-primary/10 flex items-center justify-center">
                     <span className="text-primary font-bold text-lg">{testimonial.number}</span>
                   </div>
-                  <p className="text-foreground leading-relaxed italic">
-                    {testimonial.quote.includes("years") ? (
-                      <>
-                        After <span className="font-bold">years</span> of digestive issues, Dr. Abimbola Kazeem's
-                        approach finally gave me answers. I feel like myself again.
-                      </>
-                    ) : testimonial.quote.includes("decade") ? (
-                      <>
-                        The personalized care I received was life-changing. My energy levels are better than they've
-                        been in <span className="font-bold">a decade</span>.
-                      </>
-                    ) : (
-                      testimonial.quote
-                    )}
-                  </p>
+                  <p className="text-foreground leading-relaxed italic">{testimonial.quote}</p>
                   <div className="pt-4 border-t border-border">
                     <p className="font-semibold text-foreground">{testimonial.author}</p>
                     <p className="text-sm text-muted-foreground">{testimonial.role}</p>
