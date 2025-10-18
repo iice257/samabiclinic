@@ -14,8 +14,8 @@ export default function AdminBlogPage() {
     <div>
       <div className="flex items-center justify-between mb-8">
         <div>
-          <h1 className="text-4xl font-bold mb-2">Blog Posts</h1>
-          <p className="text-muted-foreground">Manage and publish blog posts for your website</p>
+          <h1 className="text-primary text-4xl font-bold mb-2 mt-6">Blog Posts</h1>
+          <p className="text-muted-foreground mb-6">Manage and publish blog posts for your website</p>
         </div>
         <Button asChild>
           <Link href="/admin/blog/new">

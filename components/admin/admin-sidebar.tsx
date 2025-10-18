@@ -2,20 +2,31 @@
 
 import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { BookOpen, Plus, LogOut, Home } from "lucide-react"
+import { BookOpen, Plus, LogOut, Home, Mail, Calendar, Newspaper } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 const adminLinks = [
   {
-    title: "Blog Dashboard",
-    href: "/admin/blog",
-    icon: BookOpen,
+    title: "Home",
+    href: "/admin",
+    icon: Home,
   },
   {
-    title: "New Post",
-    href: "/admin/blog/new",
-    icon: Plus,
+    title: "Blog",
+    href: "/admin/blog",
+    icon: Newspaper,
+  },
+  {
+    title: "Newsletters",
+    href: "/admin/newsletters",
+    icon: Mail,
+  },
+  {
+    title: "Bookings",
+    href: "/admin/bookings",
+    icon: Calendar,
   },
 ]
 
@@ -29,15 +40,24 @@ export function AdminSidebar() {
   }
 
   return (
-    <aside className="w-64 bg-muted/30 border-r border-border min-h-screen flex flex-col">
+    <aside className="sticky top-0 left-0 w-64 bg-muted/30 border-r border-border min-h-screen max-h-screen flex flex-col">
       <div className="p-6 border-b border-border">
-        <h2 className="text-xl font-bold">Admin Panel</h2>
+        <Link href="/admin" className="flex items-center gap-2">
+          <Image
+            src="/favicon.png"
+            alt="Samabi Logo"
+            width={40}
+            height={40}
+            className="rounded-sm object-cover transition-transform duration-700 group-hover:scale-105"
+          />  
+          <h2 className="text-muted-primary text-xl font-bold">Samabi Admin</h2>
+        </Link>
       </div>
 
       <nav className="flex-1 p-4 space-y-2">
         {adminLinks.map((link) => {
           const Icon = link.icon
-          const isActive = pathname === link.href || pathname.startsWith(link.href + "/")
+          const isActive = pathname === link.href
           return (
             <Link key={link.href} href={link.href}>
               <Button
@@ -50,6 +70,13 @@ export function AdminSidebar() {
             </Link>
           )
         })}
+        <hr className="my-2 border-border" />
+        <Button variant={"secondary"} asChild className="w-full justify-start">
+          <Link href="/admin/blog/new">
+            <Plus className="h-4 w-4 mr-2" />
+            New Post
+          </Link>
+        </Button>
       </nav>
 
       <div className="p-4 border-t border-border space-y-2">

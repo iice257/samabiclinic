@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Trash2 } from "lucide-react"
 import { toast } from "sonner"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface Booking {
   id: string
@@ -60,22 +61,53 @@ export function BookingManagement() {
   }
 
   if (isLoading) {
-    return <div className="text-center py-10">Loading bookings...</div>
+    return (
+      <div className="space-y-2">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-2 text-primary">Bookings & Appointments</h1>
+          <p className="text-muted-foreground text-lg">Here's where you view and manage your bookings.</p>
+        </div>
+        {[...Array(3)].map((_, i) => (
+          <Card key={i}>
+            <CardContent className="p-4">
+              <div className="flex-col items-center justify-between">
+                <div className="flex items-center gap-3 flex-1">
+                  <Skeleton className="h-4 w-4" />
+                  <div className="flex-1">
+                    <Skeleton className="h-4 w-3/4" />
+                  </div>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    )
   }
 
   if (bookings.length === 0) {
     return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-2 text-primary">Bookings & Appointments</h1>
+          <p className="text-muted-foreground text-lg">Here's where you view and manage your bookings.</p>
+        </div>
       <Card>
         <CardContent className="py-10 text-center">
           <Calendar className="h-12 w-12 mx-auto mb-4 opacity-50" />
           <p className="text-muted-foreground">No bookings yet</p>
         </CardContent>
       </Card>
+      </div>
     )
   }
 
   return (
-    <div className="space-y-4">
+    <div className="container mx-auto px-4 py-8">
+      <div className="mb-8">
+        <h1 className="text-4xl font-bold mb-2 text-primary">Bookings & Appointments</h1>
+        <p className="text-muted-foreground text-lg">Here's where you view and manage your bookings.</p>
+      </div>
       {bookings.map((booking) => (
         <Card key={booking.id}>
           <CardContent className="p-6">

@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Edit, Trash2, ChevronDown, ChevronUp } from "lucide-react"
 import Link from "next/link"
 import { toast } from "sonner"
+import { Skeleton } from "@/components/ui/skeleton"
 
 interface BlogPost {
   id: string
@@ -34,6 +35,9 @@ export function BlogPostsList() {
         .from("blog_posts")
         .select("id, title, slug, author, category, status, created_at")
         .order("created_at", { ascending: false })
+
+      console.log("data", data)
+      console.log("error", error)
 
       if (error) throw error
       setPosts(data || [])
@@ -71,8 +75,29 @@ export function BlogPostsList() {
     setExpandedPosts(newExpanded)
   }
 
-  if (isLoading) {
-    return <div className="text-center py-10">Loading posts...</div>
+if (isLoading) {
+    return (
+      <div className="space-y-2">
+        {[...Array(3)].map((_, i) => (
+          <Card key={i}>
+            <CardContent className="p-4">
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-3 flex-1">
+                  <Skeleton className="h-4 w-4" />
+                  <div className="flex-1">
+                    <Skeleton className="h-4 w-3/4" />
+                  </div>
+                </div>
+                <div className="flex gap-2">
+                  <Skeleton className="h-8 w-8" />
+                  <Skeleton className="h-8 w-8" />
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+        ))}
+      </div>
+    )
   }
 
   if (posts.length === 0) {

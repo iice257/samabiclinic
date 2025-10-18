@@ -45,42 +45,48 @@ export function NewsletterManagement() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-        <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Total Subscribers</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <p className="text-3xl font-bold">{subscribers}</p>
-          </CardContent>
-        </Card>
+    <div className="container mx-auto px-4 py-8">
+        <div className="mb-8">
+          <h1 className="text-4xl font-bold mb-2 text-primary">Bookings & Appointments</h1>
+          <p className="text-muted-foreground text-lg">Here's where you view and manage your bookings.</p>
+        </div>
+      <div className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-muted-foreground text-lg">Total Subscribers</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-muted-foreground text-3xl font-bold">{subscribers}</p>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="text-muted-foreground text-lg">Create Newsletter</CardTitle>
+            </CardHeader>
+            <CardContent>
+              <Button className="w-full">
+                <Plus className="h-4 w-4 mr-2" />
+                New Newsletter
+              </Button>
+            </CardContent>
+          </Card>
+        </div>
 
         <Card>
-          <CardHeader>
-            <CardTitle className="text-lg">Create Newsletter</CardTitle>
+          <CardHeader className="text-muted-foreground">
+            <CardTitle>Newsletter Subscribers</CardTitle>
+            <CardDescription>Manage your newsletter subscriber list</CardDescription>
           </CardHeader>
           <CardContent>
-            <Button className="w-full">
-              <Plus className="h-4 w-4 mr-2" />
-              New Newsletter
-            </Button>
+            <div className="text-center py-8 text-muted-foreground">
+              <Mail className="h-12 w-12 mx-auto mb-4 opacity-50" />
+              <p>You have {subscribers} active subscribers</p>
+            </div>
           </CardContent>
         </Card>
       </div>
-
-      <Card>
-        <CardHeader>
-          <CardTitle>Newsletter Subscribers</CardTitle>
-          <CardDescription>Manage your newsletter subscriber list</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="text-center py-8 text-muted-foreground">
-            <Mail className="h-12 w-12 mx-auto mb-4 opacity-50" />
-            <p>You have {subscribers} active subscribers</p>
-          </div>
-        </CardContent>
-      </Card>
     </div>
   )
 }

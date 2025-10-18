@@ -5,6 +5,12 @@ import { useEffect, useState } from "react"
 import { useRouter, usePathname } from "next/navigation"
 import { AdminSidebar } from "@/components/admin/admin-sidebar"
 import { isAdminAuthenticated } from "@/lib/admin-auth"
+import { Button } from "@/components/ui/button"
+import { Plus } from "lucide-react"
+import Link from "next/link"
+import { GlobalSkeleton } from "@/components/ui/global-skeleton"
+import { fab } from "@/components/ui/fab"
+
 
 export default function AdminLayout({
   children,
@@ -32,12 +38,8 @@ export default function AdminLayout({
     return <>{children}</>
   }
 
-  if (isLoading) {
-    return <div className="flex items-center justify-center min-h-screen">Loading...</div>
-  }
-
-  if (!isAuthenticated) {
-    return null
+if (isLoading) {
+    return <GlobalSkeleton />
   }
 
   return (
@@ -45,6 +47,9 @@ export default function AdminLayout({
       <AdminSidebar />
       <main className="flex-1">
         <div className="container mx-auto py-10 px-4">{children}</div>
+        <div className="fixed bottom-15 right-15 z-50">
+          {fab()}
+        </div>
       </main>
     </div>
   )

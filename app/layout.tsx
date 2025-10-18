@@ -5,6 +5,7 @@ import { Analytics } from "@vercel/analytics/next"
 import "./globals.css"
 import { Suspense } from "react"
 import { LayoutWrapper } from "./layout-wrapper"
+import { GlobalSkeleton } from "@/components/ui/global-skeleton"
 
 const inter = Inter({
   subsets: ["latin"],
@@ -49,7 +50,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-        <Suspense fallback={<div>Loading...</div>}>
+          <Suspense fallback={<GlobalSkeleton />}>
           <LayoutWrapper>{children}</LayoutWrapper>
           <Analytics />
         </Suspense>
