@@ -21,7 +21,7 @@ import {
   Heading3,
   List,
   ListOrdered,
-  Link as LinkIcon,
+  LinkIcon,
   ImageIcon,
   Save,
   Eye,
@@ -140,6 +140,35 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
     }, 0)
   }
 
+  const generateUniqueSlug = async (baseSlug: string, currentPostId?: string) => {
+    const supabase = createClient()
+    let slug = baseSlug
+    let counter = 1
+
+    while (true) {
+      const { data, error } = await supabase.from("blog_posts").select("id").eq("slug", slug).limit(1)
+
+      if (error) {
+        console.error("Error checking slug uniqueness:", error)
+        return slug
+      }
+
+      // If no post found with this slug, it's unique
+      if (!data || data.length === 0) {
+        return slug
+      }
+
+      // If editing and the only post with this slug is the current post, it's unique
+      if (currentPostId && data.length === 1 && data[0].id === currentPostId) {
+        return slug
+      }
+
+      // Slug exists, try with a number appended
+      slug = `${baseSlug}-${counter}`
+      counter++
+    }
+  }
+
   const handleSubmit = async (e: React.FormEvent, publish: boolean) => {
     e.preventDefault()
     setIsLoading(true)
@@ -151,9 +180,11 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
         .map((tag) => tag.trim())
         .filter(Boolean)
 
+      const uniqueSlug = await generateUniqueSlug(formData.slug, post?.id)
+
       const postData = {
         title: formData.title,
-        slug: formData.slug,
+        slug: uniqueSlug,
         excerpt: formData.excerpt,
         content: formData.content,
         author: formData.author,
@@ -174,11 +205,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
 
       if (error) throw error
 
-      toast.success(
-        isEditing
-          ? `Post ${publish ? "published" : "updated"} successfully!`
-          : `Draft saved successfully!`
-      )
+      toast.success(isEditing ? `Post ${publish ? "published" : "updated"} successfully!` : `Draft saved successfully!`)
       router.push("/admin/blog")
       router.refresh()
     } catch (error) {
@@ -216,6 +243,11 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
               required
               readOnly={isEditing}
             />
+            {!isEditing && (
+              <p className="text-xs text-muted-foreground">
+                Auto-generated from title. If a slug already exists, a number will be appended automatically.
+              </p>
+            )}
           </div>
 
           <div className="space-y-2">
@@ -319,7 +351,13 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
                 <Underline className="h-4 w-4" />
               </Button>
               <div className="w-px h-6 bg-border mx-1" />
-              <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("ul")} title="Bullet List">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => insertFormatting("ul")}
+                title="Bullet List"
+              >
                 <List className="h-4 w-4" />
               </Button>
               <Button
@@ -332,7 +370,13 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
                 <ListOrdered className="h-4 w-4" />
               </Button>
               <div className="w-px h-6 bg-border mx-1" />
-              <Button type="button" variant="ghost" size="sm" onClick={() => insertFormatting("link")} title="Insert Link">
+              <Button
+                type="button"
+                variant="ghost"
+                size="sm"
+                onClick={() => insertFormatting("link")}
+                title="Insert Link"
+              >
                 <LinkIcon className="h-4 w-4" />
               </Button>
               <Button
@@ -372,13 +416,7 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
           {isEditing ? "Save Changes" : "Save Draft"}
         </Button>
         <Button type="submit" disabled={isLoading}>
-          {isLoading
-            ? isEditing
-              ? "Updating..."
-              : "Publishing..."
-            : isEditing
-            ? "Update Post"
-            : "Publish Post"}
+          {isLoading ? (isEditing ? "Updating..." : "Publishing...") : isEditing ? "Update Post" : "Publish Post"}
         </Button>
       </div>
     </form>
