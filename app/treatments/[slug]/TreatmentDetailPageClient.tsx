@@ -44,7 +44,7 @@ export default function TreatmentDetailPageClient({
                 <Link href="/contact">Book Consultation</Link>
               </Button>
             </div>
-            <div className="relative h-[400px] rounded-2xl overflow-hidden shadow-2xl">
+            <div className="relative aspect-[4/3] rounded-2xl overflow-hidden shadow-2xl">
               <Image src={treatment.image || "/placeholder.svg"} alt={treatment.title} fill className="object-cover" />
             </div>
           </div>

@@ -97,57 +97,7 @@ src/
 
 ---
 
-## 🌐 Deployment
-
-Recommended: **Vercel** (for Next.js) or **Netlify**.
-Both support serverless functions for booking form handling.
-
-Steps:
-
-```bash
-# Vercel
-vercel
-
-# Netlify
-netlify deploy
-```
-
----
-
-## 🧑‍💻 Contribution Guidelines
-
-1. **Branching:**
-
-   * `main` → production-ready
-   * `dev` → active development
-
-2. **Commit convention:**
-
-   * `feat:` new features
-   * `fix:` bug fixes
-   * `docs:` documentation changes
-
-3. **Code style:**
-
-   * ESLint + Prettier enforced
-   * Use semantic HTML + accessible components
-
-4. **Testing:**
-
-   * Manual accessibility checks with Lighthouse & axe
-   * Responsive testing (mobile-first)
-
----
-
-## 📌 Roadmap
-
-* ✅ Homepage (Hero, Services, About preview, Testimonials)
-* ✅ Booking Form with consent
-* ⬜ About page (Founder bio, mission, values)
-* ⬜ Services (detailed service pages)
-* ⬜ Resources / Blog (CMS integration)
-* ⬜ SEO + Analytics setup
-* ⬜ Patient Portal (future phase)
+## 🌐 Deployment: **Vercel**.
 
 ---
 
@@ -162,9 +112,6 @@ netlify deploy
 
 © 2025 Samabi Functional Medicine Clinic. All rights reserved.
 
-```
+\`\`\`
 
 ---
-
-Would you like me to **add real badge-style sections** (build status, license, framework, etc.) at the top of the README to make it more “open-source polished”? Or should I keep it **client-facing clean** for the clinic team?
-```

@@ -3,6 +3,8 @@ import { Facebook, Instagram, Linkedin, Mail, MapPin, Phone } from "lucide-react
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import Image from "next/image"
+import { NewsletterForm } from "./newsletter-form"
+
 
 export function Footer() {
   const currentYear = new Date().getFullYear()
@@ -97,19 +99,13 @@ export function Footer() {
               </li>
             </ul>
           </div>
-
           {/* Newsletter */}
           <div>
             <h3 className="font-semibold text-foreground mb-4">Stay Updated</h3>
             <p className="text-muted-foreground text-sm mb-4">
               Subscribe to our newsletter for health tips and updates.
             </p>
-            <form className="space-y-2">
-              <Input type="email" placeholder="Your email" className="rounded-full" />
-              <Button type="submit" className="w-full rounded-full">
-                Subscribe
-              </Button>
-            </form>
+            <NewsletterForm />
           </div>
         </div>
 
@@ -117,7 +113,10 @@ export function Footer() {
         <div className="mt-12 pt-8 border-t border-border">
           <div className="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
             <p className="text-muted-foreground text-sm">
-              © {currentYear} Samabi Functional Medicine Clinic. All rights reserved.
+              © {currentYear} Samabi Functional Medicine Clinic. All rights{" "}
+                <a href="/admin" className="transition-colors font-bold hover:text-primary">
+                  reserved.
+                </a>
             </p>
             <div className="flex items-center space-x-6">
               <Link href="/privacy" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
