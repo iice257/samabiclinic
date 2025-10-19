@@ -1,10 +1,14 @@
-import { createClient } from "@/lib/supabase/server"
 import type { Tables } from "@/lib/supabase/database.types"
+import { createClient } from "@supabase/supabase-js";
+
 
 export type BlogPost = Tables<"blog_posts">
 
 export async function getBlogPost(slug: string): Promise<BlogPost | null> {
-  const supabase = createClient()
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
   const { data, error } = await supabase
     .from("blog_posts")
     .select("*")
@@ -20,7 +24,10 @@ export async function getBlogPost(slug: string): Promise<BlogPost | null> {
 }
 
 export async function getAllBlogPosts(): Promise<BlogPost[]> {
-  const supabase = createClient()
+  const supabase = createClient(
+    process.env.NEXT_PUBLIC_SUPABASE_URL!,
+  process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!
+  )
   const { data, error } = await supabase
     .from("blog_posts")
     .select("*")

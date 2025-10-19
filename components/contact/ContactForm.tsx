@@ -35,23 +35,55 @@ export function ContactForm({ onFormSubmitted }: ContactFormProps) {
     e.preventDefault()
     setIsLoading(true)
 
-    const { error } = await supabase.from("contact_submissions").insert({
-      name: formData.name,
-      email: formData.email,
-      phone: formData.phone,
-      subject: formData.subject,
-      message: formData.message,
-    })
+    try {
+      const response = await supabase.from("contact_submissions").insert({
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        subject: formData.subject,
+        message: formData.message,
+      })
 
-    setIsLoading(false)
+      setIsLoading(false)
 
-    if (error) {
-      toast.error("Failed to send message. Please try again.")
-      console.error("Error submitting contact form:", error)
-    } else {
-      toast.success("Your message has been sent successfully!")
-      setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
-      onFormSubmitted()
+      // Log full response for easier debugging in browser console
+      // response: { data, error, status, statusText }
+      try {
+        console.debug("Supabase client shape:", {
+          hasFrom: typeof (supabase as any)?.from === "function",
+          clientType: typeof supabase,
+        })
+      } catch (e) {
+        console.debug("Supabase client debug failed", e)
+      }
+
+      console.debug("Supabase insert response:", response)
+      console.debug("response.status:", (response as any)?.status, "response.statusText:", (response as any)?.statusText)
+      try {
+        const errMsg = (response as any)?.error?.message ?? JSON.stringify((response as any)?.error) ?? null
+        console.debug("response.error.message:", errMsg)
+      } catch (e) {
+        console.debug("Could not stringify response.error", e)
+      }
+
+      if (response.error) {
+        toast.error("Failed to send message. Please try again.")
+        // Print multiple forms of the error to help identify empty object cases
+        console.error("Error submitting contact form (raw):", response.error)
+        try {
+          console.error("Error submitting contact form (stringified):", JSON.stringify(response.error))
+        } catch (e) {
+          console.error("Error stringifying response.error:", e)
+        }
+      } else {
+        toast.success("Your message has been sent successfully!")
+        setFormData({ name: "", email: "", phone: "", subject: "", message: "" })
+        onFormSubmitted()
+      }
+    } catch (err) {
+      setIsLoading(false)
+      toast.error("Failed to send message due to an unexpected error.")
+      console.error("Unexpected error submitting contact form:", err)
     }
   }
 
