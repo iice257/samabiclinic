@@ -30,7 +30,6 @@ export async function generateMetadata({ params }: { params: { slug: string } })
     description: post.excerpt,
     openGraph: {
       title: post.title,
-      description: post.excerpt,
       type: "article",
       publishedTime: post.created_at,
       authors: [post.author],
