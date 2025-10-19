@@ -236,7 +236,7 @@ export default function HomePage() {
                 quote:
                   "After years of struggling with anxiety and depression, Dr. Kazeem's integrated approach finally gave me real relief. I feel like myself again.",
                 author: "Chioma O.",
-                role: "Lagos",
+                role: "Port Harcourt",
               },
               {
                 number: 2,

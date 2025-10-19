@@ -105,8 +105,8 @@ src/
 
 **Samabi Functional Medicine Clinic**
 📍 Rumuosi, Port Harcourt, Nigeria
-📧 [contact@samabi-clinic.com](mailto:contact@samabi-clinic.com)
-📞 +234-XXX-XXX-XXXX
+📧 [Kazeem.uthman@npmcn.com](mailto:Kazeem.uthman@npmcn.com)
+📞 +2348166423218
 
 ---
 

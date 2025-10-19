@@ -14,12 +14,12 @@ const inter = Inter({
 })
 
 export const metadata: Metadata = {
-  title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Lagos",
+  title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Port Harcourt",
   description:
-    "Transform your health with personalized functional medicine. Expert care for gut health, hormonal balance, chronic fatigue, and stress management in Lagos, Nigeria.",
+    "Transform your health with personalized functional medicine. Expert care for gut health, hormonal balance, chronic fatigue, and stress management in Port Harcourt, Nigeria.",
   keywords: [
     "functional medicine",
-    "Lagos",
+    "Port Harcourt",
     "Nigeria",
     "gut health",
     "hormonal balance",
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
   ],
   authors: [{ name: "Samabi Functional Medicine Clinic" }],
   openGraph: {
-    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Lagos",
+    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Port Harcourt",
     description: "Transform your health with personalized functional medicine.",
     type: "website",
     locale: "en_US",
@@ -36,7 +36,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Lagos",
+    title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Port Harcourt",
     description: "Transform your health with personalized functional medicine.",
   },
 }
