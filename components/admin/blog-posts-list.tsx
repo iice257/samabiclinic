@@ -36,9 +36,6 @@ export function BlogPostsList() {
         .select("id, title, slug, author, category, status, created_at")
         .order("created_at", { ascending: false })
 
-      console.log("data", data)
-      console.log("error", error)
-
       if (error) throw error
       setPosts(data || [])
     } catch (error) {

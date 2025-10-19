@@ -49,7 +49,7 @@ export function AdminSidebar() {
 
 
   return (
-    <aside className="sticky top-0 left-0 w-64 bg-muted/30 border-r border-border min-h-screen flex flex-col">
+    <aside className="sticky top-0 left-0 w-64 bg-muted/30 border-r border-border max-h-screen min-h-screen flex flex-col">
       <div className="flex items-center justify-between p-2 border-b border-border">
         <Link href="/admin" className="flex items-center gap-2">
           <Image src="/favicon.png" alt="Samabi Logo" width={20} height={20} className="rounded-sm" />

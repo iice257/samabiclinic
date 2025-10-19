@@ -7,23 +7,10 @@ import Image from "next/image"
 import { Card } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { Calendar, Clock } from "lucide-react"
-import { createClient } from "@/lib/supabase/client"
+import { getAllBlogPosts, BlogPost } from "@/lib/data/blog-posts"
 import { toast } from "sonner"
 import { Skeleton } from "@/components/ui/skeleton"
 import { Button } from "@/components/ui/button"
-
-interface BlogPost {
-  slug: string
-  title: string
-  excerpt: string
-  content: string
-  author: string
-  date: string
-  readTime: string
-  category: string
-  tags: string[]
-  image: string
-}
 
 export default function InsightsPage() {
   const [posts, setPosts] = useState<BlogPost[]>([])
@@ -32,15 +19,8 @@ export default function InsightsPage() {
   useEffect(() => {
     const fetchPosts = async () => {
       try {
-        const supabase = createClient()
-        const { data, error } = await supabase
-          .from("blog_posts")
-          .select("*")
-          .eq("status", "post")
-          .order("created_at", { ascending: false })
-
-        if (error) throw error
-        setPosts(data || [])
+        const fetchedPosts = await getAllBlogPosts()
+        setPosts(fetchedPosts)
       } catch (error) {
         console.error("Error fetching posts:", error)
         toast.error("Failed to load blog posts")

@@ -196,9 +196,11 @@ export function BlogEditorForm({ post }: BlogEditorFormProps) {
       if (isEditing) {
         const { error: updateError } = await supabase.from("blog_posts").update(postData).eq("id", post.id)
         error = updateError
+        console.log("Supabase update error:", error)
       } else {
         const { error: insertError } = await supabase.from("blog_posts").insert(postData)
         error = insertError
+        console.log("Supabase insert error:", error)
       }
 
       if (error) throw error

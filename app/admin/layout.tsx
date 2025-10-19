@@ -23,20 +23,26 @@ export default function AdminLayout({
 }) {
   const router = useRouter()
   const pathname = usePathname()
-  const [isAuthenticated, setIsAuthenticated] = useState(false)
-  const [isLoading, setIsLoading] = useState(true)
+  const [isAuthenticated, setIsAuthenticated] = useState<boolean | null>(null) // null means checking
   const [showFab, setShowFab] = useState(true)
 
   useEffect(() => {
-    const authenticated = isAdminAuthenticated()
-
-    if (!authenticated && pathname !== "/admin/login") {
-      router.push("/admin/login")
-    } else if (authenticated) {
-      setIsAuthenticated(true)
+    if (pathname === "/admin/login") {
+      setIsAuthenticated(false) // No auth needed for login page
+      return
     }
 
-    setIsLoading(false)
+    const checkAuth = () => {
+      const authenticated = isAdminAuthenticated()
+      if (!authenticated) {
+        router.replace("/admin/login")
+        setIsAuthenticated(false)
+      } else {
+        setIsAuthenticated(true)
+      }
+    }
+
+    checkAuth()
 
     const handleScroll = () => {
       if (window.innerWidth < 768) { // Only apply on mobile screens
@@ -44,7 +50,6 @@ export default function AdminLayout({
         const scrollTop = document.documentElement.scrollTop
         const clientHeight = document.documentElement.clientHeight
 
-        // Hide FAB if scrolled past 80% of the page height
         if (scrollTop + clientHeight >= scrollHeight * 0.8) {
           setShowFab(false)
         } else {
@@ -57,13 +62,18 @@ export default function AdminLayout({
     return () => window.removeEventListener("scroll", handleScroll)
   }, [router, pathname])
 
+  if (isAuthenticated === null) {
+    return <GlobalSkeleton /> // Show skeleton while checking auth
+  }
+
+  if (!isAuthenticated && pathname !== "/admin/login") {
+    return null // Prevent rendering if not authenticated and not on login page
+  }
+
   if (pathname === "/admin/login") {
     return <>{children}</>
   }
 
-if (isLoading) {
-    return <GlobalSkeleton />
-  }
   return (
     <div className="flex min-h-screen bg-background">
       <div className="hidden md:flex">
@@ -77,7 +87,9 @@ if (isLoading) {
           </Link>
           <MobileAdminSidebar />
         </div>
-        <div className="container mx-auto py-10 px-4">{children}</div>
+        <div className="container mx-auto py-10 px-4">
+          {children}
+        </div>
         {showFab && (
           <div className="fixed bottom-15 right-15 z-50">
             {fab()}

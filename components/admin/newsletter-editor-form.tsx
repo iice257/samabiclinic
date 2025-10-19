@@ -81,9 +81,11 @@ export function NewsletterEditorForm({ newsletter }: NewsletterEditorFormProps) 
       if (isEditing) {
         const { error: updateError } = await supabase.from("newsletters").update(newsletterData).eq("id", newsletter.id)
         error = updateError
+        console.log("Supabase update error:", error)
       } else {
         const { error: insertError } = await supabase.from("newsletters").insert(newsletterData)
         error = insertError
+        console.log("Supabase insert error:", error)
       }
 
       if (error) throw error

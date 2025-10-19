@@ -33,6 +33,8 @@ export function BookingManagement() {
     try {
       const supabase = createClient()
       const { data, error } = await supabase.from("appointments").select("*").order("date", { ascending: true })
+      console.log("Bookings data:", data)
+      console.log("Bookings error:", error)
 
       if (error) throw error
       setBookings(data || [])
