@@ -76,7 +76,7 @@ export function Footer() {
               <li className="flex items-start space-x-3">
                 <MapPin className="h-5 w-5 text-primary mt-0.5 flex-shrink-0" />
                 <span className="text-muted-foreground text-sm">
-                  No 5 Isaac Ken Close, off farm Road Rumuosi Portharcourt. The nearest Bus Stop: East West Road by Amaechi School, Rumuosi Portharcourt.
+                  No 5 Isaac Ken Close, off farm Road Rumuosi Portharcourt. <br /><strong>The nearest Bus Stop: {" "}</strong>East West Road by Amaechi School, Rumuosi Portharcourt.
                 </span>
               </li>
               <li className="flex items-center space-x-3">

@@ -1,7 +1,7 @@
 "use client"
 
 import Link from "next/link"
-import { Microscope, Leaf, Apple, Heart, ArrowRight } from "lucide-react"
+import { Microscope, Leaf, Apple, Heart, ArrowRight, Briefcase, HeartHandshake, Baby } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
 const services = [
@@ -58,6 +58,46 @@ const services = [
       "Metabolic syndrome and obesity treatment",
     ],
   },
+  {
+  icon: Baby, 
+  title: "Child and Adolescent Mental Health Program",
+  description:
+    "Early assessment, counseling, and therapy for children and teenagers facing emotional, behavioral, or developmental challenges. SAMABI partners with families, schools, and caregivers to foster resilience and emotional growth.",
+  features: [
+    "Emotional and behavioral assessments",
+    "Individual and family therapy sessions",
+    "School-based mental health support",
+    "Stress and resilience training for teens",
+    "Developmental and social skills coaching",
+  ],
+},
+{
+  icon: HeartHandshake, 
+  title: "Elder Care and Assisted Living Program",
+  description:
+    "Comprehensive psychological and emotional support for seniors to promote independence, dignity, and mental wellness. Our personalized wellness plans enhance quality of life through compassionate, professional care.",
+  features: [
+    "Cognitive and emotional well-being programs",
+    "Support for loneliness and depression in seniors",
+    "Personalized therapy and counseling",
+    "Assisted living and home-based support plans",
+    "Meaningful engagement and memory care activities",
+  ],
+},
+{
+  icon: Briefcase, 
+  title: "Employee Assistance Program (EAP)",
+  description:
+    "Confidential, workplace-focused mental health and wellness services designed to enhance employee resilience, productivity, and work-life balance. SAMABI's EAP supports both staff and management in building a healthier organization.",
+  features: [
+    "Confidential counseling for employees and executives",
+    "Stress management and burnout prevention workshops",
+    "Work-life balance and resilience training",
+    "Mental health awareness sessions for teams",
+    "Tailored corporate wellness programs",
+  ],
+},
+
 ]
 
 export default function ServicesClient() {

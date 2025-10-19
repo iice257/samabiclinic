@@ -97,7 +97,7 @@ export default function InsightsPage() {
                           <div className="flex items-center gap-1">
                             <Calendar className="h-3 w-3" />
                             <span>
-                              {new Date(post.date).toLocaleDateString("en-US", {
+                              {new Date(post.created_at).toLocaleDateString("en-US", {
                                 month: "short",
                                 day: "numeric",
                                 year: "numeric",
@@ -106,7 +106,7 @@ export default function InsightsPage() {
                           </div>
                           <div className="flex items-center gap-1">
                             <Clock className="h-3 w-3" />
-                            <span>{post.readTime}</span>
+                            <span>{post.updated_at}</span>
                           </div>
                         </div>
                         <h3 className="mb-3 font-semibold text-foreground text-lg leading-tight transition-colors group-hover:text-primary">
