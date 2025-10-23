@@ -1,5 +1,7 @@
 "use client"
 
+import type React from "react"
+
 import { useState } from "react"
 import { createClient } from "@/lib/supabase/client"
 import { Input } from "@/components/ui/input"
@@ -19,20 +21,29 @@ export function NewsletterForm() {
     }
     setIsLoading(true)
 
-    const { error } = await supabase.from("newsletter_subscribers").insert({ email })
+    try {
+      const { error } = await supabase.from("newsletter_subscribers").insert({ email })
 
-    setIsLoading(false)
+      setIsLoading(false)
 
-    if (error) {
-      if (error.code === "23505") { // Unique constraint violation
-        toast.info("You are already subscribed to our newsletter.")
+      if (error) {
+        if (error.message?.includes("Supabase not configured")) {
+          toast.info("Newsletter subscription is temporarily unavailable. Please try again later.")
+        } else if (error.code === "23505") {
+          // Unique constraint violation
+          toast.info("You are already subscribed to our newsletter.")
+        } else {
+          toast.error("Failed to subscribe. Please try again.")
+          console.error("Error subscribing to newsletter:", error)
+        }
       } else {
-        toast.error("Failed to subscribe. Please try again.")
-        console.error("Error subscribing to newsletter:", error)
+        toast.success("You have been subscribed to our newsletter!")
+        setEmail("")
       }
-    } else {
-      toast.success("You have been subscribed to our newsletter!")
-      setEmail("")
+    } catch (err) {
+      setIsLoading(false)
+      toast.error("Failed to subscribe. Please try again.")
+      console.error("Error subscribing to newsletter:", err)
     }
   }
 
