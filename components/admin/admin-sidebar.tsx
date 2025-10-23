@@ -4,7 +4,7 @@ import { useRouter, usePathname } from "next/navigation"
 import Link from "next/link"
 import Image from "next/image"
 import { Button } from "@/components/ui/button"
-import { Plus, LogOut, Moon, Sun, Home, Mail, Calendar, Newspaper } from "lucide-react"
+import { Plus, LogOut, Moon, Sun, Home, Mail, Calendar, Newspaper, Users } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useState } from "react"
 
@@ -29,6 +29,11 @@ const adminLinks = [
     href: "/admin/bookings",
     icon: Calendar,
   },
+  {
+    title: "Contacts",
+    href: "/admin/contacts",
+    icon: Users,
+  },
 ]
 
 export function AdminSidebar() {
@@ -40,13 +45,11 @@ export function AdminSidebar() {
     localStorage.removeItem("adminAuth")
     router.push("/admin/login")
   }
-  
-  
+
   const toggleTheme = () => {
     setIsDark(!isDark)
     document.documentElement.classList.toggle("dark")
   }
-
 
   return (
     <aside className="sticky top-0 left-0 w-64 bg-muted/30 border-r border-border max-h-screen min-h-screen flex flex-col">
@@ -59,7 +62,6 @@ export function AdminSidebar() {
           {isDark ? <Sun className="h-5 w-5" /> : <Moon className="h-5 w-5" />}
         </Button>
       </div>
-
 
       <nav className="flex-1 p-4 space-y-2">
         {adminLinks.map((link) => {
