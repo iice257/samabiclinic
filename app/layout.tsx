@@ -27,19 +27,34 @@ export const metadata: Metadata = {
     "personalized healthcare",
   ],
   authors: [{ name: "Samabi Functional Medicine Clinic" }],
+  metadataBase: new URL("https://samabiclinic.com"),
+  icons: {
+    icon: "/favicon.png",
+    apple: "/favicon.png",
+  },
   openGraph: {
     title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Port Harcourt",
     description: "Transform your health with personalized functional medicine.",
     type: "website",
     locale: "en_US",
     siteName: "Samabi Functional Medicine Clinic",
+    url: "https://samabiclinic.com/",
+    images: [
+      {
+        url: "/social-preview.svg",
+        width: 1200,
+        height: 630,
+        alt: "Samabi Functional Medicine Clinic social preview",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "Samabi Functional Medicine Clinic | Personalized Healthcare in Port Harcourt",
     description: "Transform your health with personalized functional medicine.",
+    images: ["/social-preview.svg"],
   },
-    generator: 'v0.app'
+  generator: "v0.app",
 }
 
 export default function RootLayout({
@@ -50,7 +65,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={inter.variable}>
       <body className="font-sans antialiased">
-          <Suspense fallback={<GlobalSkeleton />}>
+        <Suspense fallback={<GlobalSkeleton />}>
           <LayoutWrapper>{children}</LayoutWrapper>
           <Analytics />
         </Suspense>
