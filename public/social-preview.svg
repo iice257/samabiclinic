@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title desc">
+  <title id="title">Samabi Functional Medicine Clinic</title>
+  <desc id="desc">Functional medicine clinic social preview.</desc>
+  <rect width="1200" height="630" fill="#f7fbf7"/>
+  <path d="M0 430c140-80 250-92 390-42s260 80 420 8 254-78 390-8v242H0z" fill="#dcefe3"/>
+  <circle cx="990" cy="154" r="82" fill="#cde7d5"/>
+  <rect x="94" y="86" width="1012" height="458" rx="36" fill="#ffffff" opacity="0.92"/>
+  <text x="150" y="190" fill="#123d2d" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800">Samabi Functional</text>
+  <text x="150" y="256" fill="#123d2d" font-family="Inter, Arial, sans-serif" font-size="58" font-weight="800">Medicine Clinic</text>
+  <text x="154" y="320" fill="#3f6b58" font-family="Inter, Arial, sans-serif" font-size="30">Personalized healthcare in Port Harcourt</text>
+  <g fill="none" stroke="#2f8f5b" stroke-linecap="round" stroke-linejoin="round" stroke-width="18">
+    <path d="M830 270c-80 68-98 146-54 224 84-22 144-82 172-176"/>
+    <path d="M842 438c34-78 86-128 162-156"/>
+  </g>
+  <rect x="154" y="384" width="410" height="70" rx="18" fill="#e8f4ed"/>
+  <text x="184" y="429" fill="#123d2d" font-family="Inter, Arial, sans-serif" font-size="26">Gut health • hormones • stress</text>
+</svg>
